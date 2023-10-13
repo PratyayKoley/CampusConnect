@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Mini Project</string>
+    <string name="Identity">I am a</string>
+    <string name="Student">FRCRCE Student</string>
+    <string name="Alumni">FRCRCE Alumni</string>
+    <string name="StudLogin">Student Login</string>
+    <string name="Email">Enter official Email-id : </string>
+    <string name="Hint_Mail">crce.roll.ce@gmail.com</string>
+    <string name="Password">Enter your Password : </string>
+    <string name="hint_psw">Password</string>
+    <string name="Or">OR</string>
+    <string name="Login">Login</string>
+</resources>
