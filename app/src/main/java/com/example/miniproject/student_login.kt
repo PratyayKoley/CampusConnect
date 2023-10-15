@@ -16,7 +16,7 @@ class student_login : AppCompatActivity() {
         //making a function to handle on click
         button3.setOnClickListener {
             //creating intent
-            intent= Intent(this,student_login::class.java)
+            intent= Intent(this,Main_Forum::class.java)
             startActivity(intent)
         }
 
