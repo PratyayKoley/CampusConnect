@@ -65,7 +65,7 @@
             android:hint="@string/Msg_Hint"
             android:textColor="#000000"
             android:textSize="20sp"
-            android:inputType="TODO"
+            android:inputType="textMultiLine"
             android:autofillHints="" />
 
         <ImageView
