@@ -13,8 +13,12 @@
         android:theme="@style/Theme.MiniProject"
         tools:targetApi="31">
         <activity
-            android:name=".student_login"
+            android:name=".Main_Forum"
             android:exported="false" />
+        <activity
+            android:name=".Forum_Page"
+            android:exported="false"
+            android:label="@string/title_activity_forum_page" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -24,6 +28,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".alumni_login"
+            android:parentActivityName=".AlumniSignup" />
+        <activity
+            android:name=".alumni_signup"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".student_login"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>

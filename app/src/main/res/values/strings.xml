@@ -10,4 +10,11 @@
     <string name="hint_psw">Password</string>
     <string name="Or">OR</string>
     <string name="Login">Login</string>
+    <string name="Alumni_Signup">Alumni Signup</string>
+    <string name="Hint_Alumni_Mail">alucrce.id.ce@gmail.com</string>
+    <string name="Signup">Signup</string>
+    <string name="Already">Already have an account ? Login</string>
+    <string name="AluLogin">Alumni Login</string>
+    <string name="Group_name">FRCRCE Forum</string>
+    <string name="Msg_Hint">Type a message</string>
 </resources>

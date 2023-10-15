@@ -4,11 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="20dp"
-    android:paddingTop="0dp"
-    android:paddingEnd="20dp"
-    android:paddingBottom="20dp"
-    tools:context=".StudentLogin">
+    tools:context=".AlumniSignup">
 
     <TextView
         android:id="@+id/textView9"
@@ -16,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:fontFamily="serif"
-        android:text="@string/StudLogin"
+        android:text="@string/Alumni_Signup"
         android:textColor="#171515"
         android:textColorHint="#FFFFFF"
         android:textSize="35sp"
@@ -29,7 +25,7 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="31dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="100dp"
         android:text="@string/Email"
         android:textColor="#171515"
         android:textSize="25sp"
@@ -43,7 +39,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:hint="@string/Hint_Mail"
+        android:hint="@string/Hint_Alumni_Mail"
         android:textColorHint="#757575"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/textView10"
@@ -51,20 +47,19 @@
         app:layout_constraintStart_toStartOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
-
     <TextView
         android:id="@+id/textView11"
         android:layout_width="263dp"
         android:layout_height="31dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="60dp"
         android:text="@string/Password"
         android:textColor="#171515"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.554"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputEditText1"
         tools:ignore="TextSizeCheck" />
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout1"
@@ -84,53 +79,31 @@
             android:hint="@string/hint_psw"
             android:inputType="textPassword"
             tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/Or"
-        android:textSize="40sp"
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="171dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="64dp"
+        android:text="@string/Signup"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
-
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/google_sign_in_button"
-        android:layout_width="303dp"
-        android:layout_height="54dp"
-        android:layout_gravity="center"
-        app:colorScheme="dark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.252" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="124dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/Login"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout1" />
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="409dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="?android:attr/listDivider"
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="@string/Already"
+        android:textColor="#9C27B0"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
-        tools:ignore="VisualLintBounds" />
+        app:layout_constraintTop_toBottomOf="@+id/button5" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
