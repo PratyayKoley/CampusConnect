@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Main_Forum">
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="#FFA500"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="347dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="20sp"
+            android:layout_marginTop="7sp"
+            android:layout_marginEnd="70sp"
+            android:layout_weight="1"
+            android:fontFamily="serif"
+            android:text="@string/Group_name"
+            android:textAlignment="textStart"
+            android:textColor="#473535"
+            android:textSize="30sp"
+            tools:ignore="TextSizeCheck" />
+
+        <ImageView
+            android:id="@+id/imageButton5"
+            android:layout_width="151dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="7sp"
+            android:layout_weight="1"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            app:srcCompat="@drawable/more" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="384dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="12dp"
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Message Input Field -->
+        <EditText
+            android:id="@+id/message_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="@string/Msg_Hint"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:inputType="TODO"
+            android:autofillHints="" />
+
+        <ImageView
+            android:id="@+id/send_button"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="6sp"
+            android:layout_marginBottom="6sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/send"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <!-- Send Button -->
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="4dp"
+        android:background="#FFA500"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/imageButton"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5sp"
+            app:srcCompat="@drawable/ic_home_black_24dp" />
+
+        <ImageView
+            android:id="@+id/imageButton6"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5sp"
+            app:srcCompat="@drawable/search" />
+
+        <ImageView
+            android:id="@+id/imageButton3"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5sp"
+            app:srcCompat="@drawable/calls" />
+
+        <ImageView
+            android:id="@+id/imageButton7"
+            android:layout_width="86dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5sp"
+            app:srcCompat="@drawable/ic_notifications_black_24dp" />
+
+        <ImageView
+            android:id="@+id/imageButton8"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5sp"
+            app:srcCompat="@drawable/profile" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

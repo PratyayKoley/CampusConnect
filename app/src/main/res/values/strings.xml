@@ -15,4 +15,6 @@
     <string name="Signup">Signup</string>
     <string name="Already">Already have an account ? Login</string>
     <string name="AluLogin">Alumni Login</string>
+    <string name="Group_name">FRCRCE Forum</string>
+    <string name="Msg_Hint">Type a message</string>
 </resources>
