@@ -11,6 +11,7 @@ class alumni_signup : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alumni_signup)
+        auth = FirebaseAuth.getInstance()
         //finding button student login
         button5=findViewById(R.id.button5)
         //making a function to handle on click
