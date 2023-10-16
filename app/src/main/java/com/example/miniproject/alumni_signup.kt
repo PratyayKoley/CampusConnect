@@ -19,7 +19,7 @@ class alumni_signup : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         Stu_Email = findViewById(R.id.Stu_Email)
         Alum_Pass = findViewById(R.id.Alum_Pass)
-        button5 = findViewById(R.id.button5)
+        button5 = finjdViewById(R.id.button5)
 
         button5.setOnClickListener {
             if (checking()) {
