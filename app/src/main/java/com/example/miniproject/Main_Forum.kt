@@ -14,6 +14,10 @@ class Main_Forum : AppCompatActivity() {
         setContentView(R.layout.activity_main_forum)
 
         auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance().getReference("messages")
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
+        database = FirebaseDatabase.getInstance("https://mini-project-62a72-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("messages")
+
+
+
     }
 }

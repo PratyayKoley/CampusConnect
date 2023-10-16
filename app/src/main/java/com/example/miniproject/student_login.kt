@@ -19,20 +19,24 @@ class student_login : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
+        Stu_Email = findViewById(R.id.Stu_Email)
+        Password = findViewById(R.id.Password)
+        Login = findViewById(R.id.button3)
         Login.setOnClickListener{
             if(checking()){
                 val email=Stu_Email.text.toString()
                 val password=Password.text.toString()
-                auth.signInWithEmailAndPassword(email,password)
-                    .addOnCompleteListener(this){
-                        task ->
-                        if(task.isSuccessful){
-                            Toast.makeText(this,"Login Successfull ",Toast.LENGTH_LONG).show()
 
-                        }
-                        else
-                        {
-                            Toast.makeText(this,"Wrong Credentials",Toast.LENGTH_LONG).show()
+
+                auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this@student_login) { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(this@student_login, "Login Successful", Toast.LENGTH_LONG).show()
+                            intent = Intent(this,Main_Forum::class.java)
+                            startActivity(intent)
+                        } else {
+                            val exception = task.exception
+                            Toast.makeText(this@student_login, "Authentication failed: ${exception?.message}", Toast.LENGTH_LONG).show()
                         }
                     }
 
@@ -46,10 +50,7 @@ class student_login : AppCompatActivity() {
     }
     private fun checking():Boolean
     {
-        if(Stu_Email.text.toString().trim().isEmpty() || Password.text.toString().trim().isEmpty())
-        {
-            return true
-        }
-            return false
+
+        return !(Stu_Email.text.toString().trim().isEmpty() || Password.text.toString().trim().isEmpty())
     }
 }
