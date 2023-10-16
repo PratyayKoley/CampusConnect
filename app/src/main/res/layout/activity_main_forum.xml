@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".Main_Forum">
 
     <LinearLayout
@@ -16,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/FRCRCE_Forum"
             android:layout_width="347dp"
             android:layout_height="47dp"
             android:layout_marginStart="20sp"
@@ -31,7 +32,7 @@
             tools:ignore="TextSizeCheck" />
 
         <ImageView
-            android:id="@+id/imageButton5"
+            android:id="@+id/More"
             android:layout_width="151dp"
             android:layout_height="45dp"
             android:layout_marginTop="7sp"
@@ -43,8 +44,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="384dp"
-        android:layout_height="60dp"
+        android:id="@+id/linearLayout2"
+        android:layout_width="404dp"
+        android:layout_height="68dp"
         android:layout_marginBottom="12dp"
         android:background="#FFFFFF"
         android:gravity="center_vertical"
@@ -61,6 +63,7 @@
             android:id="@+id/message_input"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:autofillHints=""
             android:hint="@string/Msg_Hint"
@@ -102,14 +105,14 @@
             app:srcCompat="@drawable/ic_home_black_24dp" />
 
         <ImageView
-            android:id="@+id/imageButton6"
+            android:id="@+id/search"
             android:layout_width="80dp"
             android:layout_height="50dp"
             android:layout_marginTop="5sp"
             app:srcCompat="@drawable/search" />
 
         <ImageView
-            android:id="@+id/imageButton3"
+            android:id="@+id/calls"
             android:layout_width="80dp"
             android:layout_height="50dp"
             android:layout_marginTop="5sp"
@@ -123,11 +126,36 @@
             app:srcCompat="@drawable/notifications" />
 
         <ImageView
-            android:id="@+id/imageButton8"
+            android:id="@+id/profile"
             android:layout_width="80dp"
             android:layout_height="50dp"
             android:layout_marginTop="5sp"
             app:srcCompat="@drawable/profile" />
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatRecyclerView"
+        android:layout_width="413dp"
+        android:layout_height="523dp"
+        android:layout_marginTop="4dp"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        android:padding="20sp"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="44dp"
+        android:layout_height="38dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

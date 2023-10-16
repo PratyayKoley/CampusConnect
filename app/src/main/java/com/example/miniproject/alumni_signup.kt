@@ -17,7 +17,7 @@ class alumni_signup : AppCompatActivity() {
         //making a function to handle on click
         button5.setOnClickListener {
             //creating intent
-            intent= Intent(this,student_login::class.java)
+            intent= Intent(this,alumni_login::class.java)
             startActivity(intent)
         }
 
