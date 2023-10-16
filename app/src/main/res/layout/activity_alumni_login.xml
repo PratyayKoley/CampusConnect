@@ -68,6 +68,7 @@
         app:passwordToggleEnabled="true">
 
         <EditText
+            android:id="@+id/Alu_Pass"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:autofillHints=""
