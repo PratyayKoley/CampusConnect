@@ -72,6 +72,7 @@
         app:passwordToggleEnabled="true">
 
         <EditText
+            android:id="@+id/Alum_Pass"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:autofillHints=""
