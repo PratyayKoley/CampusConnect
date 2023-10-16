@@ -15,10 +15,7 @@
         <activity
             android:name=".Main_Forum"
             android:exported="false" />
-        <activity
-            android:name=".Forum_Page"
-            android:exported="false"
-            android:label="@string/title_activity_forum_page" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
