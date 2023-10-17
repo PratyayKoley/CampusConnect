@@ -19,7 +19,7 @@ class student_login : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        Stu_Email = findViewById(R.id.Stu_Email)
+        Stu_Email = findViewById(R.id.AluEmail)
         Password = findViewById(R.id.Password)
         Login = findViewById(R.id.button3)
         Login.setOnClickListener{
