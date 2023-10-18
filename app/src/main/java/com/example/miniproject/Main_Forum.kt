@@ -44,7 +44,7 @@ class Main_Forum : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId)
         {
-            R.id.menu_item ->{
+            R.id.menu_item -> {
 
                 return true
             }
