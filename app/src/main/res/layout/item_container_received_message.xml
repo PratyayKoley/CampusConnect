@@ -6,7 +6,7 @@
     android:padding="4sp">
 
     <TextView
-        android:id="@+id/textMessage"
+        android:id="@+id/receiveMessage"
         android:layout_width="800dp"
         android:layout_height="110dp"
         android:background="@drawable/background_receive_message"
