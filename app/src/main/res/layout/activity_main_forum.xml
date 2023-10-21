@@ -19,8 +19,8 @@
 
         <TextView
             android:id="@+id/FRCRCE_Forum"
-            android:layout_width="347dp"
-            android:layout_height="47dp"
+            android:layout_width="316dp"
+            android:layout_height="60dp"
             android:layout_marginStart="20sp"
             android:layout_marginTop="7sp"
             android:layout_marginEnd="70sp"
@@ -33,6 +33,16 @@
             tools:ignore="TextSizeCheck" />
 
         <ImageView
+            android:id="@+id/search"
+            android:layout_width="151dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="7sp"
+            android:layout_weight="1"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            app:srcCompat="@drawable/search" />
+
+        <ImageView
             android:id="@+id/More"
             android:layout_width="151dp"
             android:layout_height="45dp"
@@ -41,6 +51,7 @@
             android:adjustViewBounds="false"
             android:cropToPadding="false"
             app:srcCompat="@drawable/more" />
+
 
 
 
@@ -112,11 +123,11 @@
             app:srcCompat="@drawable/ic_home_black_24dp" />
 
         <ImageView
-            android:id="@+id/search"
+            android:id="@+id/books"
             android:layout_width="80dp"
             android:layout_height="50dp"
             android:layout_marginTop="5sp"
-            app:srcCompat="@drawable/search" />
+            app:srcCompat="@drawable/books" />
 
         <ImageView
             android:id="@+id/calls"
