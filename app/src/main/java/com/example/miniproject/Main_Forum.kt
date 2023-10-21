@@ -19,6 +19,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.PopupMenu
 
+
 class Main_Forum : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
@@ -28,9 +29,14 @@ class Main_Forum : AppCompatActivity() {
         setContentView(R.layout.activity_main_forum)
 
         val moreImageView: ImageView = findViewById(R.id.More)
+        val notify: ImageView = findViewById(R.id.imageButton7)
 
         moreImageView.setOnClickListener { view ->
             showPopupMenu(view)
+        }
+        notify.setOnClickListener {
+            intent = Intent(this , calendarView::class.java)
+            startActivity(intent)
         }
         auth = FirebaseAuth.getInstance()
         FirebaseDatabase.getInstance().setPersistenceEnabled(true)
