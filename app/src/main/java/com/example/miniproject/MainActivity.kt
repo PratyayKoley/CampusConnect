@@ -4,14 +4,21 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.google.firebase.auth.FirebaseAuth
 
 lateinit var button: Button
 lateinit var button2: Button
-
+private lateinit var auth: FirebaseAuth
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //To check if  user is logged in or not
+        auth = FirebaseAuth.getInstance()
+        if(auth.currentUser != null) {
+            val out = Intent(this, Main_Forum::class.java)
+            startActivity(out)
+        }
         //finding button student login
         button=findViewById(R.id.button)
         //making a function to handle on click
