@@ -18,18 +18,24 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.PopupMenu
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 
 
 class Main_Forum : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
 
+    var selectedItemIndex = 0
+    private val arrItems = arrayOf("Student" , "Alumni")
+    var selectedItem = arrItems[selectedItemIndex]
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_forum)
 
         val moreImageView: ImageView = findViewById(R.id.More)
         val notify: ImageView = findViewById(R.id.imageButton7)
+        val search: ImageView = findViewById(R.id.search)
 
         moreImageView.setOnClickListener { view ->
             showPopupMenu(view)
@@ -38,6 +44,28 @@ class Main_Forum : AppCompatActivity() {
             intent = Intent(this , calendarView::class.java)
             startActivity(intent)
         }
+
+        search.setOnClickListener {
+            MaterialAlertDialogBuilder(this)
+                .setTitle("Select one to search for")
+                .setSingleChoiceItems(arrItems, selectedItemIndex) {dialog, which->
+                    selectedItemIndex = which
+                    selectedItem = arrItems[which]
+                }
+                .setPositiveButton("OK") {dialog, which->
+                    val intent = when(selectedItem) {
+                        "Student" -> Intent(this, search::class.java)
+                        "Alumni" -> Intent(this, search::class.java)
+                        else -> Intent(this, Main_Forum::class.java)
+                    }
+                    showSnackbar(it, "$selectedItem Selected" , intent)
+                }
+                .setNeutralButton("Cancel") {dialog, which->
+
+                }.show()
+        }
+
+
         auth = FirebaseAuth.getInstance()
         FirebaseDatabase.getInstance().setPersistenceEnabled(true)
         database =
@@ -47,6 +75,13 @@ class Main_Forum : AppCompatActivity() {
 
     }
 
+    private fun showSnackbar(view: View, msg: String, intent: Intent) {
+        Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
+            .setAction("OK") {
+                startActivity(intent)
+            }
+            .show()
+    }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_item, menu)
         return true
