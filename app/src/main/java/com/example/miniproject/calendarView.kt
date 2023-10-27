@@ -13,7 +13,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 
-
 class calendarView : AppCompatActivity() {
     private lateinit var calendar: CalendarView
     private lateinit var edittext : EditText
