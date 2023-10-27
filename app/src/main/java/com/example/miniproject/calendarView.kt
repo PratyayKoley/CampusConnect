@@ -50,7 +50,7 @@ class calendarView : AppCompatActivity() {
                 if (snapshot.value != null) {
                     edittext.setText(snapshot.value.toString())
                 } else {
-                    edittext.setText("No Event")
+                    edittext.setText("")
                 }
             }
 
