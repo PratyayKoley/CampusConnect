@@ -20,4 +20,7 @@
     <string name="Group_name">FRCRCE Forum</string>
     <string name="Msg_Hint">Type a message</string>
     <string name="Logout">Logout</string>
+    <string name="events">List of Events</string>
+    <string name="hintEnter_event">Enter the event</string>
+    <string name="Add_Event">Save Event</string>
 </resources>

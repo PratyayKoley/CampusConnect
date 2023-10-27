@@ -19,8 +19,8 @@
 
         <TextView
             android:id="@+id/FRCRCE_Forum"
-            android:layout_width="347dp"
-            android:layout_height="47dp"
+            android:layout_width="346dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20sp"
             android:layout_marginTop="7sp"
             android:layout_marginEnd="70sp"
@@ -33,6 +33,16 @@
             tools:ignore="TextSizeCheck" />
 
         <ImageView
+            android:id="@+id/search"
+            android:layout_width="151dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="7sp"
+            android:layout_weight="1"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            app:srcCompat="@drawable/search" />
+
+        <ImageView
             android:id="@+id/More"
             android:layout_width="151dp"
             android:layout_height="45dp"
@@ -41,6 +51,7 @@
             android:adjustViewBounds="false"
             android:cropToPadding="false"
             app:srcCompat="@drawable/more" />
+
 
 
 
@@ -66,22 +77,26 @@
             android:id="@+id/message_input"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:background="@drawable/msg_input"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:autofillHints=""
             android:hint="@string/Msg_Hint"
+            android:padding="20dp"
             android:inputType="textMultiLine"
             android:textColor="#000000"
             android:textSize="20sp" />
 
         <ImageView
             android:id="@+id/send_button"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="6sp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8sp"
             android:layout_marginBottom="6sp"
+            android:background="@drawable/send_button"
             android:clickable="true"
             android:focusable="true"
+            android:padding="9dp"
             android:src="@drawable/send"
             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -108,11 +123,11 @@
             app:srcCompat="@drawable/ic_home_black_24dp" />
 
         <ImageView
-            android:id="@+id/search"
+            android:id="@+id/books"
             android:layout_width="80dp"
             android:layout_height="50dp"
             android:layout_marginTop="5sp"
-            app:srcCompat="@drawable/search" />
+            app:srcCompat="@drawable/books" />
 
         <ImageView
             android:id="@+id/calls"
@@ -138,25 +153,26 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRecyclerView"
-        android:layout_width="413dp"
-        android:layout_height="523dp"
+        android:layout_width="415dp"
+        android:layout_height="522dp"
         android:layout_marginTop="4dp"
         android:clipToPadding="false"
         android:orientation="vertical"
         android:overScrollMode="never"
-        tools:listitem="@layout/item_container_received_message"
         android:padding="20sp"
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        tools:listitem="@layout/item_container_received_message" />
 
     <ProgressBar
         android:id="@+id/progressBar"
-        android:layout_width="44dp"
-        android:layout_height="38dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
