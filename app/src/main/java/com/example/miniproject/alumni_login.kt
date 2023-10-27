@@ -73,15 +73,19 @@ import com.google.firebase.auth.FirebaseAuth
 import android.widget.Button
 import android.widget.Toast
 import android.content.Intent
+import com.example.miniproject.databinding.ActivityAlumniLoginBinding
+import com.example.miniproject.databinding.ActivityAlumniSignupBinding
 
 class alumni_login : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+    private lateinit var binding: ActivityAlumniLoginBinding
     private lateinit var editTextTextEmailAddress: EditText
     private lateinit var Alu_Pass: EditText
     private lateinit var Login: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityAlumniLoginBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_alumni_login)
         auth = FirebaseAuth.getInstance()
         editTextTextEmailAddress = findViewById(R.id.editTextTextEmailAddress)
@@ -102,8 +106,7 @@ class alumni_login : AppCompatActivity() {
                         } else {
                             val exception = task.exception
                             Toast.makeText(
-                                this,
-                                "Authentication failed: ${exception?.message}",
+                                this, "Authentication failed: ${exception?.message}",
                                 Toast.LENGTH_LONG
                             ).show()
                         }

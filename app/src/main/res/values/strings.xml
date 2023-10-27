@@ -19,4 +19,5 @@
     <string name="AluLogin">Alumni Login</string>
     <string name="Group_name">FRCRCE Forum</string>
     <string name="Msg_Hint">Type a message</string>
+    <string name="Logout">Logout</string>
 </resources>
