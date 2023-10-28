@@ -23,4 +23,5 @@
     <string name="events">List of Events</string>
     <string name="hintEnter_event">Enter the event</string>
     <string name="Add_Event">Save Event</string>
+    <string name="select">Select Resource</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.example.miniproject
 
 import android.content.Intent
+import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -36,10 +37,17 @@ class Main_Forum : AppCompatActivity() {
         val moreImageView: ImageView = findViewById(R.id.More)
         val notify: ImageView = findViewById(R.id.imageButton7)
         val search: ImageView = findViewById(R.id.search)
+        val book : ImageView = findViewById(R.id.books)
 
         moreImageView.setOnClickListener { view ->
             showPopupMenu(view)
         }
+
+        book.setOnClickListener {
+            intent = Intent(this , resources::class.java)
+            startActivity(intent)
+        }
+
         notify.setOnClickListener {
             intent = Intent(this , calendarView::class.java)
             startActivity(intent)

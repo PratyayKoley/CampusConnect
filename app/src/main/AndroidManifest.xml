@@ -15,6 +15,9 @@
         android:theme="@style/Theme.MiniProject"
         tools:targetApi="31">
         <activity
+            android:name=".resources"
+            android:exported="false" />
+        <activity
             android:name=".search"
             android:exported="false" />
         <activity
