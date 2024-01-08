@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:focusableInTouchMode="true"
     android:background="#fbe1ac"
-    tools:context=".resources">
+    tools:context=".book">
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -16,11 +16,13 @@
         android:layout_margin="16dp"
         android:hint="@string/select"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-    <AutoCompleteTextView
+
+        <AutoCompleteTextView
             android:id="@+id/select_resource"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"/>
+            android:inputType="none"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

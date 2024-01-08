@@ -7,10 +7,10 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
 
-class resources : AppCompatActivity() {
+class book : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_resources)
+        setContentView(R.layout.activity_book)
 
         val items = listOf("Sem Question Papers", "UT Question Papers", "Study Materials", "Books")
 

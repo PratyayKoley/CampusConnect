@@ -1,4 +1,5 @@
 package com.example.miniproject
+import android.widget.EditText
 
 import android.content.Intent
 import android.content.res.Resources
@@ -21,88 +22,14 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-
+import android.widget.ListView
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import android.text.TextUtils
 
 class Main_Forum : AppCompatActivity() {
-    private lateinit var auth: FirebaseAuth
-    private lateinit var database: DatabaseReference
-
-    var selectedItemIndex = 0
-    private val arrItems = arrayOf("Student" , "Alumni")
-    var selectedItem = arrItems[selectedItemIndex]
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_forum)
-
-        val moreImageView: ImageView = findViewById(R.id.More)
-        val notify: ImageView = findViewById(R.id.imageButton7)
-        val search: ImageView = findViewById(R.id.search)
-        val book : ImageView = findViewById(R.id.books)
-
-        moreImageView.setOnClickListener { view ->
-            showPopupMenu(view)
-        }
-
-        book.setOnClickListener {
-            intent = Intent(this , resources::class.java)
-            startActivity(intent)
-        }
-
-        notify.setOnClickListener {
-            intent = Intent(this , calendarView::class.java)
-            startActivity(intent)
-        }
-
-        search.setOnClickListener {
-            MaterialAlertDialogBuilder(this)
-                .setTitle("Select one to search for")
-                .setSingleChoiceItems(arrItems, selectedItemIndex) {dialog, which->
-                    selectedItemIndex = which
-                    selectedItem = arrItems[which]
-                }
-                .setPositiveButton("OK") {dialog, which->
-                    val intent = when(selectedItem) {
-                        "Student" -> Intent(this, search::class.java)
-                        "Alumni" -> Intent(this, search::class.java)
-                        else -> Intent(this, Main_Forum::class.java)
-                    }
-                    showSnackbar(it, "$selectedItem Selected" , intent)
-                }
-                .setNeutralButton("Cancel") {dialog, which->
-
-                }.show()
-        }
-
-
-        auth = FirebaseAuth.getInstance()
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
-        database =
-            FirebaseDatabase.getInstance("https://mini-project-62a72-default-rtdb.asia-southeast1.firebasedatabase.app")
-                .getReference("messages")
-
-
-    }
-
-    private fun showSnackbar(view: View, msg: String, intent: Intent) {
-        Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
-            .setAction("OK") {
-                startActivity(intent)
-            }
-            .show()
-    }
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_item, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.menu_item -> {
-                return true
-            }
-            else -> return super.onOptionsItemSelected(item)
-        }
-    }
+    // Your existing code for Main_Forum goes here...
 
     private fun showPopupMenu(view: View?) {
         Log.d("Debug", "More ImageView clicked")
@@ -124,5 +51,69 @@ class Main_Forum : AppCompatActivity() {
             }
         }
         popupMenu.show()
+    }
+}
+
+class GroupChatActivity : AppCompatActivity() {
+
+    private lateinit var messageListView: ListView
+    private lateinit var messageEditText: EditText
+    private lateinit var sendButton: Button
+
+    private lateinit var databaseReference: DatabaseReference
+    private lateinit var auth: FirebaseAuth
+
+    private lateinit var messagesAdapter: MessagesAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_group_chat)
+
+        messageListView = findViewById(R.id.messageListView)
+        messageEditText = findViewById(R.id.messageEditText)
+        send_button = findViewById(R.id.send_button)
+
+        auth = FirebaseAuth.getInstance()
+        databaseReference = FirebaseDatabase.getInstance().reference.child("groupChat")
+
+        messagesAdapter = MessagesAdapter(this, R.layout.message_item)
+        messageListView.adapter = messagesAdapter
+
+        sendButton.setOnClickListener {
+            sendMessage()
+        }
+
+        // Listen for changes in the database and update the UI accordingly
+        databaseReference.addChildEventListener(object : ChildEventListener {
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val message = snapshot.getValue(Message::class.java)
+                messagesAdapter.add(message)
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {}
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
+
+            override fun onCancelled(error: DatabaseError) {}
+        })
+    }
+
+    private fun sendMessage() {
+        val messageText = messageEditText.text.toString().trim()
+
+        if (TextUtils.isEmpty(messageText)) {
+            return
+        }
+
+        val currentUser = auth.currentUser
+        val userId = currentUser?.uid ?: return
+
+        val message = Message(userId, currentUser.displayName, messageText)
+        databaseReference.push().setValue(message)
+
+        // Clear the message input field
+        messageEditText.text.clear()
     }
 }
