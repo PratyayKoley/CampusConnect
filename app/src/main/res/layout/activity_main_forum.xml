@@ -83,6 +83,7 @@
             android:autofillHints=""
             android:hint="@string/Msg_Hint"
             android:padding="20dp"
+            android:cursorVisible="true"
             android:inputType="textMultiLine"
             android:textColor="#000000"
             android:textSize="20sp" />

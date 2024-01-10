@@ -1,28 +1,38 @@
-
 package com.example.miniproject.adapter
-import com.example.miniproject.R
-
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.miniproject.R
 import com.example.miniproject.model.Message
 
-class MessagesAdapter(context: Context, resource: Int, messages: List<Message>) :
-    ArrayAdapter<Message>(context, resource, messages) {
+class MessagesAdapter(private val context: Context, private val messages: List<Message>) :
+    RecyclerView.Adapter<MessagesAdapter.MessageViewHolder>() {
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+    inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val messageTextView: TextView = itemView.findViewById(R.id.message_input)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         val inflater = LayoutInflater.from(context)
-        val view = inflater.inflate(resource, parent, false)
+        val view = inflater.inflate(R.layout.activity_main_forum, parent, false)
+        return MessageViewHolder(view)
+    }
 
-        val messageTextView: TextView = view.findViewById(R.id.messageTextView)
+    override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
+        val message = messages[position]
+        holder.messageTextView.text = message.text
+    }
 
-        val message = getItem(position)
-        messageTextView.text = message?.text
+    override fun getItemCount(): Int {
+        return messages.size
+    }
 
-        return view
+    fun add(message: Message?) {
+//        messages.add(message)
+        notifyItemInserted(messages.size - 1)
     }
 }

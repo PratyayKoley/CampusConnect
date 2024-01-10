@@ -2,6 +2,7 @@ package com.example.miniproject
 import android.widget.EditText
 
 import android.content.Intent
+import com.example.miniproject.model.Message
 import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -27,18 +28,22 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import android.text.TextUtils
+import androidx.recyclerview.widget.RecyclerView
+import com.example.miniproject.R.*
+import com.example.miniproject.adapter.MessagesAdapter
 
 class Main_Forum : AppCompatActivity() {
     // Your existing code for Main_Forum goes here...
-
+    private lateinit var auth: FirebaseAuth
     private fun showPopupMenu(view: View?) {
+        auth = FirebaseAuth.getInstance()
         Log.d("Debug", "More ImageView clicked")
         val popupMenu = PopupMenu(this, view)
         val inflater = popupMenu.menuInflater
-        inflater.inflate(R.menu.menu_item, popupMenu.menu)
+        inflater.inflate(menu.menu_item, popupMenu.menu)
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.menu_item -> {
+                id.menu_item -> {
                     if (auth.currentUser != null) {
                         auth.signOut()
                         val out = Intent(this, MainActivity::class.java)
@@ -56,7 +61,7 @@ class Main_Forum : AppCompatActivity() {
 
 class GroupChatActivity : AppCompatActivity() {
 
-    private lateinit var messageListView: ListView
+    private lateinit var messageRecyclerView: RecyclerView
     private lateinit var messageEditText: EditText
     private lateinit var sendButton: Button
 
@@ -67,17 +72,18 @@ class GroupChatActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_group_chat)
+        setContentView(layout.activity_main_forum)
 
-        messageListView = findViewById(R.id.messageListView)
-        messageEditText = findViewById(R.id.messageEditText)
-        send_button = findViewById(R.id.send_button)
+        messageRecyclerView = findViewById(id.chatRecyclerView)
+        messageEditText = findViewById(id.message_input)
+        sendButton = findViewById(id.send_button)
 
         auth = FirebaseAuth.getInstance()
-        databaseReference = FirebaseDatabase.getInstance().reference.child("groupChat")
+        databaseReference = FirebaseDatabase.getInstance("https://mini-project-62a72-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("messages")
 
-        messagesAdapter = MessagesAdapter(this, R.layout.message_item)
-        messageListView.adapter = messagesAdapter
+        messagesAdapter = MessagesAdapter(this, mutableListOf())
+        messageRecyclerView.adapter = messagesAdapter
+
 
         sendButton.setOnClickListener {
             sendMessage()
