@@ -35,6 +35,24 @@ import com.example.miniproject.adapter.MessagesAdapter
 class Main_Forum : AppCompatActivity() {
     // Your existing code for Main_Forum goes here...
     private lateinit var auth: FirebaseAuth
+    private lateinit var database: DatabaseReference
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main_forum)
+        val moreImageView: ImageView = findViewById(R.id.More)
+        val notify: ImageView = findViewById(R.id.imageButton7)
+        val search: ImageView = findViewById(R.id.search)
+        val book : ImageView = findViewById(R.id.books)
+
+        moreImageView.setOnClickListener { view ->
+            showPopupMenu(view)
+        }
+
+        notify.setOnClickListener {
+            intent = Intent(this , calendarView::class.java)
+            startActivity(intent)
+        }
+    }
     private fun showPopupMenu(view: View?) {
         auth = FirebaseAuth.getInstance()
         Log.d("Debug", "More ImageView clicked")
@@ -79,7 +97,8 @@ class GroupChatActivity : AppCompatActivity() {
         sendButton = findViewById(id.send_button)
 
         auth = FirebaseAuth.getInstance()
-        databaseReference = FirebaseDatabase.getInstance("https://mini-project-62a72-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("messages")
+        databaseReference = FirebaseDatabase.getInstance("https://mini-project-62a72-default-rtdb.asia-southeast1.firebasedatabase.app")
+            .getReference("messages")
 
         messagesAdapter = MessagesAdapter(this, mutableListOf())
         messageRecyclerView.adapter = messagesAdapter
@@ -87,6 +106,8 @@ class GroupChatActivity : AppCompatActivity() {
 
         sendButton.setOnClickListener {
             sendMessage()
+
+
         }
 
         // Listen for changes in the database and update the UI accordingly
@@ -108,7 +129,6 @@ class GroupChatActivity : AppCompatActivity() {
 
     private fun sendMessage() {
         val messageText = messageEditText.text.toString().trim()
-
         if (TextUtils.isEmpty(messageText)) {
             return
         }
