@@ -7,7 +7,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
 
-class book : AppCompatActivity() {
+class Book : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book)

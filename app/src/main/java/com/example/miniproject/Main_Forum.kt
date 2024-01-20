@@ -52,6 +52,11 @@ class Main_Forum : AppCompatActivity() {
             intent = Intent(this , calendarView::class.java)
             startActivity(intent)
         }
+
+        book.setOnClickListener {
+            intent = Intent(this , Book::class.java)
+            startActivity(intent)
+        }
     }
     private fun showPopupMenu(view: View?) {
         auth = FirebaseAuth.getInstance()
