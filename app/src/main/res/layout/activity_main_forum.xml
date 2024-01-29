@@ -94,9 +94,9 @@
             android:background="@drawable/send_button"
             android:clickable="true"
             android:focusable="true"
-            android:padding="9dp"
+            android:padding="8dp"
             android:src="@drawable/send"
-            tools:ignore="SpeakableTextPresentCheck" />
+            android:contentDescription="Send Button"/>
 
         <!-- Send Button -->
     </LinearLayout>
