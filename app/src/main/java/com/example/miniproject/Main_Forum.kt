@@ -52,8 +52,6 @@ class Main_Forum : AppCompatActivity() {
             startActivity(intent)
         }
 
-        //
-
 
             messageRecyclerView = findViewById(R.id.chatRecyclerView)
             messageEditText = findViewById(R.id.message_input)
@@ -67,7 +65,7 @@ class Main_Forum : AppCompatActivity() {
             messageRecyclerView.adapter = messagesAdapter
 
             sendButton.setOnClickListener {
-                Toast.makeText(this, "GG", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Sent Successful", Toast.LENGTH_LONG).show()
                 sendMessage()
             }
 
@@ -155,21 +153,48 @@ data class Message(
 class MessagesAdapter(private val context: Context, private val messages: MutableList<Message>) :
     RecyclerView.Adapter<MessagesAdapter.MessageViewHolder>() {
 
+    private val VIEW_TYPE_SENT = 1
+    private val VIEW_TYPE_RECEIVED = 2
+    // Update the MessageViewHolder class to include the user name TextView
     class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val messageText: TextView = itemView.findViewById(R.id.message_text)
-        val userName: TextView = itemView.findViewById(R.id.user_name)
+        val messageText: TextView = itemView.findViewById(R.id.textMessage)
+        val userName: TextView = itemView.findViewById(R.id.Name)
     }
 
+    // Update onCreateViewHolder method to inflate the correct layout based on the view type
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.message_item, parent, false)
+        val layoutResId = if (viewType == VIEW_TYPE_RECEIVED) {
+            R.layout.item_container_received_message
+        } else {
+            R.layout.item_container_sent_message
+        }
+        val view = LayoutInflater.from(context).inflate(layoutResId, parent, false)
         return MessageViewHolder(view)
     }
 
+    // Update onBindViewHolder method to set data based on the view type
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
         val message = messages[position]
-        holder.userName.text = message.displayName
-        holder.messageText.text = message.messageText
+
+        if (getItemViewType(position) == VIEW_TYPE_RECEIVED) {
+            // This is a received message, set user name and message text
+            holder.userName.text = message.displayName
+            holder.messageText.text = message.messageText
+        } else {
+            // This is a sent message, set only message text
+            holder.messageText.text = message.messageText
+        }
     }
+
+    override fun getItemViewType(position: Int): Int {
+        val message = messages[position]
+        return if (message.userId == auth.currentUser?.uid) {
+            VIEW_TYPE_SENT
+        } else {
+            VIEW_TYPE_RECEIVED
+        }
+    }
+
 
     override fun getItemCount(): Int {
         return messages.size
@@ -181,9 +206,4 @@ class MessagesAdapter(private val context: Context, private val messages: Mutabl
             notifyDataSetChanged()
         }
     }
-}
-
-class GroupChatActivity : AppCompatActivity() {
-
-
 }

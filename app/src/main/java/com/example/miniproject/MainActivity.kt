@@ -8,7 +8,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 lateinit var button: Button
 lateinit var button2: Button
-private lateinit var auth: FirebaseAuth
+lateinit var auth: FirebaseAuth
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
