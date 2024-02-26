@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.content.Context
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -23,7 +24,7 @@ class Main_Forum : AppCompatActivity() {
     private lateinit var messageRecyclerView: RecyclerView
     private lateinit var messageEditText: EditText
     private lateinit var sendButton: ImageView
-
+    private lateinit var progressBar: ProgressBar
     private lateinit var databaseReference: DatabaseReference
     private lateinit var auth: FirebaseAuth
 
@@ -32,7 +33,7 @@ class Main_Forum : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_forum)
-
+        progressBar = findViewById(R.id.progressBar)
         val moreImageView: ImageView = findViewById(R.id.More)
         val notify: ImageView = findViewById(R.id.imageButton7)
         val search: ImageView = findViewById(R.id.search)
@@ -73,8 +74,10 @@ class Main_Forum : AppCompatActivity() {
             // Listen for changes in the database and update the UI accordingly
             databaseReference.addChildEventListener(object : ChildEventListener {
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                    showProgressBar()
                     val message = snapshot.getValue(Message::class.java)
                     messagesAdapter.add(message)
+                    hideProgressBar()
                 }
 
                 override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
@@ -83,10 +86,18 @@ class Main_Forum : AppCompatActivity() {
 
                 override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
 
-                override fun onCancelled(error: DatabaseError) {}
+                override fun onCancelled(error: DatabaseError) {
+                    hideProgressBar()
+                }
             })
         }
 
+    private fun showProgressBar() {
+        progressBar.visibility = ProgressBar.VISIBLE
+    }
+    private fun hideProgressBar() {
+        progressBar.visibility = ProgressBar.GONE
+    }
     fun sendMessage() {
         Log.d("Button", "Button clicked")
         val messageText = messageEditText.text.toString().trim()

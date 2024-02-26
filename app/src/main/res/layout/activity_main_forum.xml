@@ -19,18 +19,17 @@
 
         <TextView
             android:id="@+id/FRCRCE_Forum"
-            android:layout_width="346dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20sp"
+            android:layout_width="448dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="15sp"
             android:layout_marginTop="7sp"
             android:layout_marginEnd="70sp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:fontFamily="serif"
             android:text="@string/Group_name"
             android:textAlignment="textStart"
             android:textColor="#473535"
-            android:textSize="25sp"
-            tools:ignore="TextSizeCheck" />
+            android:textSize="27sp" />
 
         <ImageView
             android:id="@+id/search"
@@ -58,7 +57,7 @@
         android:id="@+id/linearLayout2"
         android:layout_width="404dp"
         android:layout_height="68dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="3dp"
         android:background="#FFFFFF"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -66,24 +65,25 @@
         android:paddingEnd="16dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chatRecyclerView">
 
         <!-- Message Input Field -->
         <EditText
             android:id="@+id/message_input"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@drawable/msg_input"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:autofillHints=""
-            android:hint="@string/Msg_Hint"
-            android:padding="20dp"
+            android:background="@drawable/msg_input"
             android:cursorVisible="true"
+            android:hint="@string/Msg_Hint"
             android:inputType="textMultiLine"
+            android:padding="20dp"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="17sp" />
 
         <ImageView
             android:id="@+id/send_button"
@@ -93,10 +93,10 @@
             android:layout_marginBottom="6sp"
             android:background="@drawable/send_button"
             android:clickable="true"
+            android:contentDescription="Send Button"
             android:focusable="true"
             android:padding="8dp"
-            android:src="@drawable/send"
-            android:contentDescription="Send Button"/>
+            android:src="@drawable/send" />
 
         <!-- Send Button -->
     </LinearLayout>
@@ -105,13 +105,13 @@
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="12dp"
         android:background="#FFA500"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2">
 
         <ImageView
             android:id="@+id/imageButton"
@@ -151,27 +151,28 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRecyclerView"
-        android:layout_width="415dp"
+        android:layout_width="match_parent"
         android:layout_height="522dp"
         android:layout_marginTop="4dp"
-        android:clipToPadding="false"
+        android:clipToPadding="true"
+        android:maxHeight="522dp"
         android:orientation="vertical"
-        android:overScrollMode="never"
-        android:padding="20sp"
+        android:overScrollMode="ifContentScrolls"
+        android:padding="2dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
-<!--    <ProgressBar-->
-<!--        android:id="@+id/progressBar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />-->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
