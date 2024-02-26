@@ -158,7 +158,7 @@ class MessagesAdapter(private val context: Context, private val messages: Mutabl
     // Update the MessageViewHolder class to include the user name TextView
     class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val messageText: TextView = itemView.findViewById(R.id.textMessage)
-        val userName: TextView = itemView.findViewById(R.id.Name)
+//        val userName: TextView = itemView.findViewById(R.id.Name)
     }
 
     // Update onCreateViewHolder method to inflate the correct layout based on the view type
@@ -178,7 +178,7 @@ class MessagesAdapter(private val context: Context, private val messages: Mutabl
 
         if (getItemViewType(position) == VIEW_TYPE_RECEIVED) {
             // This is a received message, set user name and message text
-            holder.userName.text = message.displayName
+//            holder.userName.text = message.displayName
             holder.messageText.text = message.messageText
         } else {
             // This is a sent message, set only message text

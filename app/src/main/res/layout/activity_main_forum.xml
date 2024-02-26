@@ -29,7 +29,7 @@
             android:text="@string/Group_name"
             android:textAlignment="textStart"
             android:textColor="#473535"
-            android:textSize="30sp"
+            android:textSize="25sp"
             tools:ignore="TextSizeCheck" />
 
         <ImageView

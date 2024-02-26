@@ -84,22 +84,22 @@ class Book : AppCompatActivity() {
     private fun showSemFlexbox() {
         clearFlexbox()
 
-        val sem1Button = createFlexboxImageButton(R.drawable.sem1,"http://www.google.com",200,200)
+        val sem1Button = createFlexboxImageButton(R.drawable.sem1,"https://drive.google.com/drive/u/0/folders/1I015HnjoYPMA4wxO_sHZksjKksuyvG--",200,200)
         flexboxLayout.addView(sem1Button)
 
-        val sem2Button = createFlexboxImageButton(R.drawable.sem2,"http://www.google.com",200,200)
+        val sem2Button = createFlexboxImageButton(R.drawable.sem2,"https://drive.google.com/drive/folders/18Bxh-Khjn4U773u1QENucE3gKLg87HxO",200,200)
         flexboxLayout.addView(sem2Button)
 
-        val sem3Button = createFlexboxImageButton(R.drawable.sem3,"http://www.google.com",200,200)
+        val sem3Button = createFlexboxImageButton(R.drawable.sem3,"https://drive.google.com/drive/u/0/folders/1FMZzahsBL2LqKsvmZqrfO6ZLQzJsv8cW",200,200)
         flexboxLayout.addView(sem3Button)
 
-        val sem4Button = createFlexboxImageButton(R.drawable.sem4,"http://www.google.com",200,200)
+        val sem4Button = createFlexboxImageButton(R.drawable.sem4,"https://drive.google.com/drive/u/0/folders/1djJWMYLVy0XGgctr5IQ7MjmK1IiLW1OB",200,200)
         flexboxLayout.addView(sem4Button)
 
-        val sem5Button = createFlexboxImageButton(R.drawable.sem5,"http://www.google.com",200,200)
+        val sem5Button = createFlexboxImageButton(R.drawable.sem5,"https://drive.google.com/drive/folders/11HgkdrD4edZl03s4PJfQEKTz3CSfI-lL",200,200)
         flexboxLayout.addView(sem5Button)
 
-        val sem6Button = createFlexboxImageButton(R.drawable.sem6,"http://www.google.com",200,200)
+        val sem6Button = createFlexboxImageButton(R.drawable.sem6,"https://drive.google.com/drive/folders/1Fv5AXzkznEkiukC0b6_dRp9iSwcVnHUJ",200,200)
         flexboxLayout.addView(sem6Button)
 
         val sem7Button = createFlexboxImageButton(R.drawable.sem7,"http://www.google.com",200,200)
