@@ -22,10 +22,10 @@
         android:id="@+id/Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="28dp"
         android:text="Username"
         android:textColor="#3A0917"
-        android:textSize="13dp"
+        android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@id/textMessage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4sp"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="10sp"
         android:text="11:09 a.m."
         app:layout_constraintEnd_toEndOf="@id/textMessage"
         app:layout_constraintTop_toBottomOf="@id/textMessage" />
