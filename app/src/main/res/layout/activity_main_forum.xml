@@ -60,6 +60,7 @@
         android:layout_height="68dp"
         android:background="#FFFFFF"
         android:gravity="center_vertical"
+        android:layout_marginBottom="20dp"
         android:orientation="horizontal"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
@@ -104,51 +105,62 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="#FFA500"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
         app:layout_constraintVertical_bias="1.0">
 
-        <ImageView
-            android:id="@+id/imageButton"
-            android:layout_width="80dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="5sp"
-            app:srcCompat="@drawable/ic_home_black_24dp" />
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/flexboxLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:justifyContent="space_between"
+            app:alignItems="center"
+            app:flexWrap="wrap"
+            app:flexDirection="row">
 
-        <ImageView
-            android:id="@+id/books"
-            android:layout_width="80dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="5sp"
-            app:srcCompat="@drawable/books" />
+            <ImageView
+                android:id="@+id/imageButton"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5sp"
+                app:srcCompat="@drawable/ic_home_black_24dp" />
 
-        <ImageView
-            android:id="@+id/calls"
-            android:layout_width="80dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="5sp"
-            app:srcCompat="@drawable/calls" />
+            <ImageView
+                android:id="@+id/books"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5sp"
+                app:srcCompat="@drawable/books" />
 
-        <ImageView
-            android:id="@+id/imageButton7"
-            android:layout_width="86dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="5sp"
-            app:srcCompat="@drawable/notifications" />
+            <ImageView
+                android:id="@+id/calls"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5sp"
+                app:srcCompat="@drawable/calls" />
 
-        <ImageView
-            android:id="@+id/profile"
-            android:layout_width="80dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="5sp"
-            app:srcCompat="@drawable/profile" />
+            <ImageView
+                android:id="@+id/imageButton7"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5sp"
+                app:srcCompat="@drawable/notifications" />
+
+            <ImageView
+                android:id="@+id/profile"
+                android:layout_width="80dp"
+                android:layout_height="47dp"
+                android:layout_marginTop="5sp"
+                app:srcCompat="@drawable/profile" />
+
+        </com.google.android.flexbox.FlexboxLayout>
     </LinearLayout>
 
     <ProgressBar

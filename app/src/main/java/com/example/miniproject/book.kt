@@ -48,22 +48,22 @@ class Book : AppCompatActivity() {
     private fun showBookFlexbox() {
         clearFlexbox()
 
-        val math1 = createFlexboxImageButton(R.drawable.mathsem1,"http://www.google.com",200,200)
+        val math1 = createFlexboxImageButton(R.drawable.mathsem1,"http://www.google.com",150,150)
         flexboxLayout.addView(math1)
 
-        val math2 = createFlexboxImageButton(R.drawable.mathsem2,"http://www.google.com",200,200)
+        val math2 = createFlexboxImageButton(R.drawable.mathsem2,"http://www.google.com",150,150)
         flexboxLayout.addView(math2)
 
-        val math3 = createFlexboxImageButton(R.drawable.mathsem3,"http://www.google.com",200,200)
+        val math3 = createFlexboxImageButton(R.drawable.mathsem3,"http://www.google.com",150,150)
         flexboxLayout.addView(math3)
 
-        val math4 = createFlexboxImageButton(R.drawable.mathsem4,"http://www.google.com",200,200)
+        val math4 = createFlexboxImageButton(R.drawable.mathsem4,"http://www.google.com",150,150)
         flexboxLayout.addView(math4)
 
-        val cormen = createFlexboxImageButton(R.drawable.cormen,"http://www.google.com",200,200)
+        val cormen = createFlexboxImageButton(R.drawable.cormen,"http://www.google.com",150,150)
         flexboxLayout.addView(cormen)
 
-        val c = createFlexboxImageButton(R.drawable.letusc,"http://www.google.com",200,200)
+        val c = createFlexboxImageButton(R.drawable.letusc,"http://www.google.com",150,150)
         flexboxLayout.addView(c)
 
     }
@@ -71,51 +71,51 @@ class Book : AppCompatActivity() {
     private fun showMaterialFlexbox() {
         clearFlexbox()
 
-        val drafter = createFlexboxImageButton(R.drawable.drafter,"http://www.google.com",200,200)
+        val drafter = createFlexboxImageButton(R.drawable.drafter,"http://www.google.com",150,150)
         flexboxLayout.addView(drafter)
 
-        val container = createFlexboxImageButton(R.drawable.container,"http://www.google.com",200,200)
+        val container = createFlexboxImageButton(R.drawable.container,"http://www.google.com",150,150)
         flexboxLayout.addView(container)
 
-        val roller = createFlexboxImageButton(R.drawable.roller,"http://www.google.com",200,200)
+        val roller = createFlexboxImageButton(R.drawable.roller,"http://www.google.com",150,150)
         flexboxLayout.addView(roller)
     }
 
     private fun showSemFlexbox() {
         clearFlexbox()
 
-        val sem1Button = createFlexboxImageButton(R.drawable.sem1,"https://drive.google.com/drive/u/0/folders/1I015HnjoYPMA4wxO_sHZksjKksuyvG--",200,200)
+        val sem1Button = createFlexboxImageButton(R.drawable.sem1,"https://drive.google.com/drive/u/0/folders/1I015HnjoYPMA4wxO_sHZksjKksuyvG--",150,150)
         flexboxLayout.addView(sem1Button)
 
-        val sem2Button = createFlexboxImageButton(R.drawable.sem2,"https://drive.google.com/drive/folders/18Bxh-Khjn4U773u1QENucE3gKLg87HxO",200,200)
+        val sem2Button = createFlexboxImageButton(R.drawable.sem2,"https://drive.google.com/drive/folders/18Bxh-Khjn4U773u1QENucE3gKLg87HxO",150,150)
         flexboxLayout.addView(sem2Button)
 
-        val sem3Button = createFlexboxImageButton(R.drawable.sem3,"https://drive.google.com/drive/u/0/folders/1FMZzahsBL2LqKsvmZqrfO6ZLQzJsv8cW",200,200)
+        val sem3Button = createFlexboxImageButton(R.drawable.sem3,"https://drive.google.com/drive/u/0/folders/1FMZzahsBL2LqKsvmZqrfO6ZLQzJsv8cW",150,150)
         flexboxLayout.addView(sem3Button)
 
-        val sem4Button = createFlexboxImageButton(R.drawable.sem4,"https://drive.google.com/drive/u/0/folders/1djJWMYLVy0XGgctr5IQ7MjmK1IiLW1OB",200,200)
+        val sem4Button = createFlexboxImageButton(R.drawable.sem4,"https://drive.google.com/drive/u/0/folders/1djJWMYLVy0XGgctr5IQ7MjmK1IiLW1OB",150,150)
         flexboxLayout.addView(sem4Button)
 
-        val sem5Button = createFlexboxImageButton(R.drawable.sem5,"https://drive.google.com/drive/folders/11HgkdrD4edZl03s4PJfQEKTz3CSfI-lL",200,200)
+        val sem5Button = createFlexboxImageButton(R.drawable.sem5,"https://drive.google.com/drive/folders/11HgkdrD4edZl03s4PJfQEKTz3CSfI-lL",150,150)
         flexboxLayout.addView(sem5Button)
 
-        val sem6Button = createFlexboxImageButton(R.drawable.sem6,"https://drive.google.com/drive/folders/1Fv5AXzkznEkiukC0b6_dRp9iSwcVnHUJ",200,200)
+        val sem6Button = createFlexboxImageButton(R.drawable.sem6,"https://drive.google.com/drive/folders/1Fv5AXzkznEkiukC0b6_dRp9iSwcVnHUJ",150,150)
         flexboxLayout.addView(sem6Button)
 
-        val sem7Button = createFlexboxImageButton(R.drawable.sem7,"http://www.google.com",200,200)
+        val sem7Button = createFlexboxImageButton(R.drawable.sem7,"http://www.google.com",150,150)
         flexboxLayout.addView(sem7Button)
 
-        val sem8Button = createFlexboxImageButton(R.drawable.sem8,"http://www.google.com",200,200)
+        val sem8Button = createFlexboxImageButton(R.drawable.sem8,"http://www.google.com",150,150)
         flexboxLayout.addView(sem8Button)
     }
 
     private fun showUTFlexbox() {
         clearFlexbox()
 
-        val ut1Button = createFlexboxImageButton(R.drawable.ut1,"http://www.google.com",200,200)
+        val ut1Button = createFlexboxImageButton(R.drawable.ut1,"http://www.google.com",150,150)
         flexboxLayout.addView(ut1Button)
 
-        val ut2Button = createFlexboxImageButton(R.drawable.ut2,"http://www.google.com",200,200)
+        val ut2Button = createFlexboxImageButton(R.drawable.ut2,"http://www.google.com",150,150)
         flexboxLayout.addView(ut2Button)
     }
 
