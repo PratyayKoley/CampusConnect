@@ -116,6 +116,7 @@ class Main_Forum : AppCompatActivity() {
         }
 
         val userId = currentUser.uid
+
         val timestamp = System.currentTimeMillis()
 
         val message = Message(userId, currentUser.displayName, messageText, timestamp)
