@@ -19,6 +19,10 @@ import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+
 
 class Main_Forum : AppCompatActivity() {
     private lateinit var messageRecyclerView: RecyclerView
@@ -112,8 +116,9 @@ class Main_Forum : AppCompatActivity() {
         }
 
         val userId = currentUser.uid
+        val timestamp = System.currentTimeMillis()
 
-        val message = Message(userId, currentUser.displayName, messageText)
+        val message = Message(userId, currentUser.displayName, messageText, timestamp)
         val messageKey = databaseReference.push().key
 
         if (messageKey != null) {
@@ -158,7 +163,8 @@ class Main_Forum : AppCompatActivity() {
 data class Message(
     val userId: String? = null,
     val displayName: String? = null,
-    val messageText: String? = null
+    val messageText: String? = null,
+    val timestamp: Long? = null
 )
 
 class MessagesAdapter(private val context: Context, private val messages: MutableList<Message>) :
@@ -168,6 +174,7 @@ class MessagesAdapter(private val context: Context, private val messages: Mutabl
     private val VIEW_TYPE_RECEIVED = 2
     // Update the MessageViewHolder class to include the user name TextView
     class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val timestamp: TextView = itemView.findViewById(R.id.textDateTime)
         val messageText: TextView = itemView.findViewById(R.id.textMessage)
 //        val userName: TextView = itemView.findViewById(R.id.Name)
     }
@@ -191,12 +198,22 @@ class MessagesAdapter(private val context: Context, private val messages: Mutabl
             // This is a received message, set user name and message text
 //            holder.userName.text = message.displayName
             holder.messageText.text = message.messageText
+            holder.timestamp.text = formatTimestamp(message.timestamp)
+
         } else {
             // This is a sent message, set only message text
             holder.messageText.text = message.messageText
+            holder.timestamp.text = formatTimestamp(message.timestamp)
         }
     }
 
+    private fun formatTimestamp(timestamp: Long?): String {
+        if (timestamp == null) {
+            return ""
+        }
+        val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        return sdf.format(Date(timestamp))
+    }
     override fun getItemViewType(position: Int): Int {
         val message = messages[position]
         return if (message.userId == auth.currentUser?.uid) {
