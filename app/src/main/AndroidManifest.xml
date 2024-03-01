@@ -18,7 +18,7 @@
             android:name=".Book"
             android:exported="false" />
         <activity
-            android:name=".search"
+            android:name=".Search"
             android:exported="false" />
         <activity
             android:name=".calendarView"

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.PopupMenu
@@ -47,6 +46,10 @@ class Main_Forum : AppCompatActivity() {
             showPopupMenu(view)
         }
 
+        search.setOnClickListener {
+            intent = Intent(this, search::class.java)
+            startActivity(intent)
+        }
         notify.setOnClickListener {
             intent = Intent(this, calendarView::class.java)
             startActivity(intent)
@@ -126,6 +129,9 @@ class Main_Forum : AppCompatActivity() {
             databaseReference.child(messageKey).setValue(message)
                 .addOnSuccessListener {
                     Log.d("SendMessage", "Message sent successfully")
+
+                    // Scroll to the last item in the RecyclerView
+                    messageRecyclerView.smoothScrollToPosition(messagesAdapter.itemCount - 1)
                 }
                 .addOnFailureListener { e ->
                     Log.e("SendMessage", "Error sending message", e)

@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:focusableInTouchMode="true"
     android:background="#fbe1ac"
-    tools:context=".book">
+    tools:context=".Book">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/resource_layout"
