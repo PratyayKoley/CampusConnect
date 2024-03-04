@@ -24,4 +24,6 @@
     <string name="hintEnter_event">Enter the event</string>
     <string name="Add_Event">Save Event</string>
     <string name="select">Select Resource</string>
+    <string name="Change_Dp">Change the photo\n</string>
+    <string name="Edit_username">Edit the username</string>
 </resources>

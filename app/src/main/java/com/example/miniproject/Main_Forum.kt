@@ -16,6 +16,8 @@ import android.content.Context
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import java.text.SimpleDateFormat
@@ -30,7 +32,9 @@ class Main_Forum : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private lateinit var databaseReference: DatabaseReference
     private lateinit var auth: FirebaseAuth
-
+    var selectedItemIndex = 0
+    private val arrItems = arrayOf("Student" , "Alumni")
+    var selectedItem = arrItems[selectedItemIndex]
     private lateinit var messagesAdapter: MessagesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,14 +45,35 @@ class Main_Forum : AppCompatActivity() {
         val notify: ImageView = findViewById(R.id.imageButton7)
         val search: ImageView = findViewById(R.id.search)
         val book: ImageView = findViewById(R.id.books)
+        val profile: ImageView = findViewById(R.id.profile)
+
+        profile.setOnClickListener{
+            intent = Intent(this,Profile::class.java)
+            startActivity(intent)
+        }
 
         moreImageView.setOnClickListener { view ->
             showPopupMenu(view)
         }
 
         search.setOnClickListener {
-            intent = Intent(this, search::class.java)
-            startActivity(intent)
+            MaterialAlertDialogBuilder(this)
+                .setTitle("Select one to search for")
+                .setSingleChoiceItems(arrItems, selectedItemIndex) {dialog, which->
+                    selectedItemIndex = which
+                    selectedItem = arrItems[which]
+                }
+                .setPositiveButton("OK") {dialog, which->
+                    val intent = when(selectedItem) {
+                        "Student" -> Intent(this, Search::class.java)
+                        "Alumni" -> Intent(this, Search::class.java)
+                        else -> Intent(this, Main_Forum::class.java)
+                    }
+                    showSnackbar(it, "$selectedItem Selected" , intent)
+                }
+                .setNeutralButton("Cancel") {dialog, which->
+
+                }.show()
         }
         notify.setOnClickListener {
             intent = Intent(this, calendarView::class.java)
@@ -98,6 +123,14 @@ class Main_Forum : AppCompatActivity() {
                 }
             })
         }
+
+    private fun showSnackbar(view: View, msg: String, intent: Intent) {
+        Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
+            .setAction("OK") {
+                startActivity(intent)
+            }
+            .show()
+    }
 
     private fun showProgressBar() {
         progressBar.visibility = ProgressBar.VISIBLE

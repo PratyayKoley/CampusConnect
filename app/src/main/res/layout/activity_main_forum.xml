@@ -118,44 +118,44 @@
 
         <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/flexboxLayout2"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
-            app:justifyContent="space_between"
             app:alignItems="center"
+            app:flexDirection="row"
             app:flexWrap="wrap"
-            app:flexDirection="row">
+            app:justifyContent="center">
 
             <ImageView
                 android:id="@+id/imageButton"
-                android:layout_width="80dp"
+                android:layout_width="72dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="5sp"
                 app:srcCompat="@drawable/ic_home_black_24dp" />
 
             <ImageView
                 android:id="@+id/books"
-                android:layout_width="80dp"
+                android:layout_width="72dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="5sp"
                 app:srcCompat="@drawable/books" />
 
             <ImageView
                 android:id="@+id/calls"
-                android:layout_width="80dp"
+                android:layout_width="72dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="5sp"
                 app:srcCompat="@drawable/calls" />
 
             <ImageView
                 android:id="@+id/imageButton7"
-                android:layout_width="80dp"
+                android:layout_width="72dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="5sp"
                 app:srcCompat="@drawable/notifications" />
 
             <ImageView
                 android:id="@+id/profile"
-                android:layout_width="80dp"
+                android:layout_width="72dp"
                 android:layout_height="47dp"
                 android:layout_marginTop="5sp"
                 app:srcCompat="@drawable/profile" />
