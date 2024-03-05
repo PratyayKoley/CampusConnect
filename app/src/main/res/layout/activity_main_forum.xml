@@ -127,35 +127,35 @@
 
             <ImageView
                 android:id="@+id/imageButton"
-                android:layout_width="72dp"
+                android:layout_width="80dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="5sp"
                 app:srcCompat="@drawable/ic_home_black_24dp" />
 
             <ImageView
                 android:id="@+id/books"
-                android:layout_width="72dp"
+                android:layout_width="80dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="5sp"
                 app:srcCompat="@drawable/books" />
 
             <ImageView
                 android:id="@+id/calls"
-                android:layout_width="72dp"
+                android:layout_width="80dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="5sp"
                 app:srcCompat="@drawable/calls" />
 
             <ImageView
                 android:id="@+id/imageButton7"
-                android:layout_width="72dp"
+                android:layout_width="80dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="5sp"
                 app:srcCompat="@drawable/notifications" />
 
             <ImageView
                 android:id="@+id/profile"
-                android:layout_width="72dp"
+                android:layout_width="75dp"
                 android:layout_height="47dp"
                 android:layout_marginTop="5sp"
                 app:srcCompat="@drawable/profile" />

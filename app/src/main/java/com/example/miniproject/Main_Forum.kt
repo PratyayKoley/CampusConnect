@@ -160,14 +160,15 @@ class Main_Forum : AppCompatActivity() {
 
         if (messageKey != null) {
             databaseReference.child(messageKey).setValue(message)
-                .addOnSuccessListener {
-                    Log.d("SendMessage", "Message sent successfully")
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d("SendMessage", "Message sent successfully")
+                    } else {
+                        Log.e("SendMessage", "Error sending message", task.exception)
+                    }
 
-                    // Scroll to the last item in the RecyclerView
+                    // Scroll to the last item in the RecyclerView (whether send is successful or not)
                     messageRecyclerView.smoothScrollToPosition(messagesAdapter.itemCount - 1)
-                }
-                .addOnFailureListener { e ->
-                    Log.e("SendMessage", "Error sending message", e)
                 }
         } else {
             Log.e("SendMessage", "Message key is null")
@@ -176,6 +177,7 @@ class Main_Forum : AppCompatActivity() {
         // Clear the message input field
         messageEditText.text.clear()
     }
+
 
     private fun showPopupMenu(view: View?) {
         auth = FirebaseAuth.getInstance()
