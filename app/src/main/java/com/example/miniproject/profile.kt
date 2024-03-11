@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.ImageButton
@@ -18,13 +19,16 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.ByteArrayOutputStream
 import kotlin.math.min
-
+import android.view.View
+import com.bumptech.glide.Glide
+import android.util.Log
+private const val TAG = "ProfileActivity"
 class Profile : AppCompatActivity() {
 
-    private var editname : ImageButton = findViewById(R.id.edit_username)
-    private var username : TextView = findViewById(R.id.Username)
-    private var useremail : TextView = findViewById(R.id.Useremail)
-    private var usertype : TextView = findViewById(R.id.Usertype)
+    private lateinit var editname: ImageButton
+    private lateinit var username: TextView
+    private lateinit var useremail: TextView
+    private lateinit var usertype: TextView
     private lateinit var userDp: ImageView
     private lateinit var changeDpButton: ImageButton
     private lateinit var databaseReference: DatabaseReference
@@ -34,10 +38,7 @@ class Profile : AppCompatActivity() {
     private val pickImage = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val selectedImageUri = result.data?.data
-            // Handle the selected image URI here, e.g., set it to the ImageView
             setRoundedImage(selectedImageUri)
-
-            // Save the image to Firebase Storage and get the download URL
             saveImageToStorage(selectedImageUri)
         }
     }
@@ -46,20 +47,62 @@ class Profile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
+        // Initialize Firebase
+        auth = FirebaseAuth.getInstance()
+        databaseReference = FirebaseDatabase.getInstance("https://mini-project-62a72-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("users")
+        storage = FirebaseStorage.getInstance()
+
+        // Initialize views
+        editname = findViewById(R.id.edit_username)
+        username = findViewById(R.id.Username)
+        useremail = findViewById(R.id.Useremail)
+        usertype = findViewById(R.id.Usertype)
         userDp = findViewById(R.id.UserDP)
         changeDpButton = findViewById(R.id.changedp)
 
+        loadProfileImageAndType()
         changeDpButton.setOnClickListener {
             openImagePicker()
         }
     }
+    private fun loadProfileImageAndType() {
+        // Get the current user's UID
+        val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
+        val currentUserEmail = FirebaseAuth.getInstance().currentUser?.email
+        // Check if the UID is not null
+        currentUserUid?.let { UID ->
+            // Retrieve the profile image URL and user type from the database
+            databaseReference.child(UID).get().addOnSuccessListener { dataSnapshot ->
+                val profileImageUrl = dataSnapshot.child("profileImage").getValue(String::class.java)
+                val userType = dataSnapshot.child("Role").getValue(String::class.java)
+                Log.d(TAG, "User type fetched from database: $userType") // Log user type
 
+                // Load the image into the userDp ImageView using the URL
+                if (!profileImageUrl.isNullOrEmpty()) {
+                    Glide.with(this /* context */)
+                        .load(profileImageUrl)
+                        .into(userDp)
+                }
+
+                // Set the user type in the usertype TextView
+                usertype.text = userType
+                useremail.text = currentUserEmail.toString()
+            }.addOnFailureListener { e ->
+                // Handle any errors while fetching data from the database
+                Log.e(TAG, "Error fetching profile image URL and user type: $e")
+            }
+        }
+    }
+
+    fun onEditUsernameClick(view: View) {
+        // Add your implementation here...
+    }
     private fun openImagePicker() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         pickImage.launch(intent)
     }
 
-    private fun setRoundedImage(imageUri: android.net.Uri?) {
+    private fun setRoundedImage(imageUri: Uri?) {
         if (imageUri != null) {
             val inputStream = contentResolver.openInputStream(imageUri)
             val selectedBitmap = BitmapFactory.decodeStream(inputStream)
@@ -96,11 +139,11 @@ class Profile : AppCompatActivity() {
         return output
     }
 
-    private fun saveImageToStorage(imageUri: android.net.Uri?) {
+    private fun saveImageToStorage(imageUri: Uri?) {
         if (imageUri != null) {
             val storageReference: StorageReference =
-                FirebaseStorage.getInstance().getReference("profileImages")
-                    .child(FirebaseAuth.getInstance().currentUser?.uid ?: "")
+                storage.reference.child("profileImages")
+                    .child(auth.currentUser?.uid ?: "")
                     .child("image.jpg")
 
             val inputStream = contentResolver.openInputStream(imageUri)
@@ -130,8 +173,14 @@ class Profile : AppCompatActivity() {
 
                                 // Save the download URL to the Realtime Database under the user's node
                                 saveImageUrlToDatabase(downloadUrl)
+                            } else {
+                                // Handle failure to get download URL
+                                // Log an error or display a message to the user
                             }
                         }
+                    } else {
+                        // Handle failure to upload image
+                        // Log an error or display a message to the user
                     }
                 }
         }
@@ -142,31 +191,26 @@ class Profile : AppCompatActivity() {
         val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
 
         // Check if the UID is not null
-        currentUserUid?.let { UID ->
-            // Create a reference to the "users" node in the Realtime Database
-            val databaseReference = FirebaseDatabase.getInstance().getReference("users")
-
+        currentUserUid?.let { uid ->
             // Create a map to update the "profileImage" child
             val updateMap = hashMapOf<String, Any>("profileImage" to downloadUrl)
 
             // Update the child under the user's UID
-            databaseReference.child(UID).updateChildren(updateMap)
+            databaseReference.child(uid).updateChildren(updateMap)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        // The update was successful
-                        // Handle success if needed
+                        Log.d(TAG, "Image URL saved to Realtime Database")
                     } else {
-                        // The update failed
-                        // Handle the error if needed
+                        Log.e(TAG, "Failed to save image URL to Realtime Database")
                     }
                 }
         }
     }
+
 
     private fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
         return stream.toByteArray()
     }
-
 }
