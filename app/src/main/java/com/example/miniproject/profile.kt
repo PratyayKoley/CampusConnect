@@ -1,6 +1,7 @@
 package com.example.miniproject
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -22,11 +23,14 @@ import kotlin.math.min
 import android.view.View
 import com.bumptech.glide.Glide
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+
 private const val TAG = "ProfileActivity"
 class Profile : AppCompatActivity() {
 
     private lateinit var editname: ImageButton
-    private lateinit var username: TextView
+    private lateinit var username: EditText
     private lateinit var useremail: TextView
     private lateinit var usertype: TextView
     private lateinit var userDp: ImageView
@@ -94,9 +98,6 @@ class Profile : AppCompatActivity() {
         }
     }
 
-    fun onEditUsernameClick(view: View) {
-        // Add your implementation here...
-    }
     private fun openImagePicker() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         pickImage.launch(intent)
@@ -204,6 +205,31 @@ class Profile : AppCompatActivity() {
                         Log.e(TAG, "Failed to save image URL to Realtime Database")
                     }
                 }
+        }
+    }
+
+    fun onEditUsernameClick(view: View) {
+        val editText = findViewById<EditText>(R.id.Username)
+        val editButton = findViewById<ImageButton>(R.id.edit_username)
+
+        // Toggle editability of EditText
+        editText.isEnabled = !editText.isEnabled
+
+        if (editText.isEnabled) {
+            editText.requestFocus()
+            // Show soft keyboard
+            val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
+
+            // Change button icon to indicate editing mode
+            editButton.setImageResource(R.drawable.ok_icon) // Replace with your tick icon
+        } else {
+            // Hide soft keyboard
+            val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(editText.windowToken, 0)
+
+            // Change button icon to indicate non-editing mode
+            editButton.setImageResource(R.drawable.write) // Replace with your original icon
         }
     }
 

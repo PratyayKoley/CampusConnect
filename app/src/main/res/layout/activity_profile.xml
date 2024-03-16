@@ -34,19 +34,19 @@
         app:layout_constraintTop_toTopOf="@+id/UserDP"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <TextView
+    <EditText
         android:id="@id/Username"
         android:layout_width="368dp"
         android:layout_height="60dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="104dp"
         android:background="@drawable/username_bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="#000000"
         android:hint="Username"
-        android:textSize="17sp"
-        android:textColorHint="#323232"
         android:paddingLeft="60dp"
-        android:paddingTop="18dp"
+        android:textColor="#000000"
+        android:textColorHint="#323232"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/UserDP" />
 
@@ -111,7 +111,7 @@
         android:id="@+id/appname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="88dp"
         android:text="CampusConnect"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
