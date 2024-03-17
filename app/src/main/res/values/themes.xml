@@ -36,5 +36,9 @@
         <item name="android:background">@drawable/border</item>
         <item name="android:textColor">@color/black</item>
     </style>
+    <style name="SearchBackground">
+        <item name="android:background">@drawable/search_input</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
     <style name="Theme.MiniProject" parent="Base.Theme.MiniProject" />
 </resources>
