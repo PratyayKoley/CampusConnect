@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fbe1ac"
+    style="@style/BackgroundColor"
     tools:context=".alumni_login">
 
     <TextView
@@ -15,6 +15,7 @@
         android:fontFamily="serif"
         android:text="@string/AluLogin"
         android:textSize="35sp"
+        style="@style/TextColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,6 +26,7 @@
         android:layout_height="31dp"
         android:layout_marginTop="84dp"
         android:fontFamily="serif"
+        style="@style/TextColor"
         android:text="@string/Email"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,15 +39,17 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/Hint_Alumni_Mail"
         android:inputType="textEmailAddress"
-        android:textColorHint="#757575"
-        android:textSize="20sp"
+        style="@style/TextColor"
+        android:textColorHint="@color/Grey"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
-        android:autofillHints="" />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/textView5"
@@ -54,6 +58,7 @@
         android:layout_marginTop="60dp"
         android:text="@string/Password"
         android:textSize="25sp"
+        style="@style/TextColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
@@ -75,6 +80,8 @@
             android:autofillHints=""
             android:ems="10"
             android:hint="@string/hint_psw"
+            style="@style/PasswordField"
+            android:textColorHint="@color/Grey"
             android:inputType="textPassword"
             tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
 
@@ -83,10 +90,12 @@
     <Button
         android:id="@+id/button4"
         android:layout_width="124dp"
-        android:layout_height="59dp"
+        android:layout_height="65dp"
         android:layout_marginTop="44dp"
         android:text="@string/Login"
-        android:textSize="25sp"
+        android:textColor="@color/white"
+        style="@style/ButtonBackground"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

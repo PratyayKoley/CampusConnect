@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fbe1ac"
+    style="@style/BackgroundColor"
     tools:context=".calendarView">
 
     <CalendarView
@@ -26,6 +26,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="176dp"
         android:text="@string/events"
+        style="@style/TextColor"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,8 +38,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:hint="@string/hintEnter_event"
+        android:textColorHint="@color/Grey"
+        style="@style/TextColor"
         android:padding="10sp"
-        android:textSize="30sp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calendarView" />
@@ -48,9 +51,10 @@
         android:layout_width="182dp"
         android:layout_height="63dp"
         android:layout_marginTop="40dp"
-        android:background="@drawable/msg_input"
+        style="@style/ButtonBackground"
         android:text="@string/Add_Event"
-        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"

@@ -8,7 +8,7 @@
     android:paddingTop="0dp"
     android:paddingEnd="20dp"
     android:paddingBottom="20dp"
-    android:background="#fbe1ac"
+    style="@style/BackgroundColor"
     tools:context=".StudentLogin">
 
     <TextView
@@ -18,8 +18,7 @@
         android:layout_marginTop="60dp"
         android:fontFamily="serif"
         android:text="@string/StudLogin"
-        android:textColor="#171515"
-        android:textColorHint="#FFFFFF"
+        style="@style/TextColor"
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -32,7 +31,7 @@
         android:layout_height="31dp"
         android:layout_marginTop="84dp"
         android:text="@string/Email"
-        android:textColor="#171515"
+        style="@style/TextColor"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,12 +45,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:hint="@string/Hint_Mail"
-        android:textColorHint="#757575"
-        android:textSize="20sp"
+        style="@style/TextColor"
+        android:textColorHint="@color/Grey"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/textView10"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/textView11"
@@ -59,7 +60,7 @@
         android:layout_height="31dp"
         android:layout_marginTop="48dp"
         android:text="@string/Password"
-        android:textColor="#171515"
+        style="@style/TextColor"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.554"
@@ -83,7 +84,9 @@
             android:layout_height="50dp"
             android:autofillHints=""
             android:ems="10"
+            android:textColorHint="@color/Grey"
             android:hint="@string/hint_psw"
+            style="@style/PasswordField"
             android:inputType="textPassword"
             tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
 
@@ -92,10 +95,12 @@
     <Button
         android:id="@+id/button3"
         android:layout_width="124dp"
-        android:layout_height="59dp"
+        android:layout_height="65dp"
         android:layout_marginTop="30dp"
         android:text="@string/Login"
-        android:textSize="25sp"
+        android:textSize="20sp"
+        style="@style/ButtonBackground"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout1" />
