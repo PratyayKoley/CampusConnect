@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.content.Context
+import android.provider.CallLog
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -46,6 +47,7 @@ class Main_Forum : AppCompatActivity() {
         val search: ImageView = findViewById(R.id.search)
         val book: ImageView = findViewById(R.id.books)
         val profile: ImageView = findViewById(R.id.profile)
+        val calls: ImageView = findViewById(R.id.calls)
 
         profile.setOnClickListener{
             intent = Intent(this,Profile::class.java)
@@ -75,8 +77,14 @@ class Main_Forum : AppCompatActivity() {
 
                 }.show()
         }
+
         notify.setOnClickListener {
             intent = Intent(this, calendarView::class.java)
+            startActivity(intent)
+        }
+
+        calls.setOnClickListener{
+            intent = Intent(this, Calls::class.java)
             startActivity(intent)
         }
 

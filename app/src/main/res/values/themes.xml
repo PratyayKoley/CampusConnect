@@ -40,5 +40,17 @@
         <item name="android:background">@drawable/search_input</item>
         <item name="android:textColor">@color/black</item>
     </style>
+    <style name="Calls">
+        <item name="android:background">@drawable/calls_input</item>
+        <item name="android:tint">@color/Black_Rock</item>
+    </style>
+    <style name="add_link_bg">
+        <item name="android:background">@drawable/add_link_background</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="RoundedCornersDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@drawable/dialog_bg</item>
+        <item name="colorPrimary">@color/Royal_Blue</item>
+    </style>
     <style name="Theme.MiniProject" parent="Base.Theme.MiniProject" />
 </resources>
