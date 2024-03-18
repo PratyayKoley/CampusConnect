@@ -1,8 +1,10 @@
 package com.example.miniproject
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -25,6 +27,9 @@ import com.bumptech.glide.Glide
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.Switch
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.SwitchCompat
 
 private const val TAG = "ProfileActivity"
 class Profile : AppCompatActivity() {
@@ -34,10 +39,12 @@ class Profile : AppCompatActivity() {
     private lateinit var useremail: TextView
     private lateinit var usertype: TextView
     private lateinit var userDp: ImageView
+    private lateinit var user_mode: TextView
     private lateinit var changeDpButton: ImageButton
     private lateinit var databaseReference: DatabaseReference
     private lateinit var auth: FirebaseAuth
     private lateinit var storage: FirebaseStorage
+
 
     private val pickImage = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
@@ -47,6 +54,7 @@ class Profile : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
@@ -57,6 +65,7 @@ class Profile : AppCompatActivity() {
         storage = FirebaseStorage.getInstance()
 
         // Initialize views
+        user_mode = findViewById(R.id.User_mode)
         editname = findViewById(R.id.edit_username)
         username = findViewById(R.id.Username)
         useremail = findViewById(R.id.Useremail)
@@ -68,7 +77,25 @@ class Profile : AppCompatActivity() {
         changeDpButton.setOnClickListener {
             openImagePicker()
         }
+        user_mode.setOnClickListener {
+            // Call a method to change the theme
+            changeTheme()
+        }
     }
+
+    private fun changeTheme() {
+        // Get the current night mode setting
+        val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        // Toggle between light and dark mode
+        val newNightMode = if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
+            AppCompatDelegate.MODE_NIGHT_YES
+        } else {
+            AppCompatDelegate.MODE_NIGHT_NO
+        }
+        // Apply the new theme
+        AppCompatDelegate.setDefaultNightMode(newNightMode)
+    }
+
     private fun loadProfileImageAndType() {
         // Get the current user's UID
         val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid

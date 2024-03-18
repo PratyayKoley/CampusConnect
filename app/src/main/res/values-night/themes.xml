@@ -51,4 +51,14 @@
         <item name="android:windowBackground">@drawable/dialog_bg_night</item>
         <item name="colorPrimary">@color/Dark_Gunmetal</item>
     </style>
+    <style name="mode">
+        <item name="android:background">@drawable/username_bg_night</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:text">"Light Theme"</item>
+    </style>
+    <style name="img_mode">
+        <item name="android:tint">@color/white</item>
+        <item name="android:src">@drawable/light_mode</item>
+    </style>
 </resources>
