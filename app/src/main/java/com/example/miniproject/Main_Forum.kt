@@ -71,7 +71,7 @@ class Main_Forum : AppCompatActivity() {
                         "Alumni" -> Intent(this, Search::class.java)
                         else -> Intent(this, Main_Forum::class.java)
                     }
-                    showSnackbar(it, "$selectedItem Selected" , intent)
+                    startActivity(intent)
                 }
                 .setNeutralButton("Cancel") {dialog, which->
 
@@ -131,14 +131,6 @@ class Main_Forum : AppCompatActivity() {
                 }
             })
         }
-
-    private fun showSnackbar(view: View, msg: String, intent: Intent) {
-        Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
-            .setAction("OK") {
-                startActivity(intent)
-            }
-            .show()
-    }
 
     private fun showProgressBar() {
         progressBar.visibility = ProgressBar.VISIBLE
