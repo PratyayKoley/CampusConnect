@@ -9,14 +9,14 @@
     <ImageButton
         android:id="@+id/UserDP"
         android:layout_width="30dp"
-        android:layout_height="39dp"
+        android:layout_height="26dp"
         style="@style/dp"
         android:paddingLeft="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Name"
         app:layout_constraintBottom_toTopOf="@+id/textMessage"
-        app:srcCompat="@drawable/profile"
+        app:srcCompat="@drawable/dp"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <TextView
