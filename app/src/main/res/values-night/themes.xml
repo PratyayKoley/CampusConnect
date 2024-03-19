@@ -61,4 +61,7 @@
         <item name="android:tint">@color/white</item>
         <item name="android:src">@drawable/light_mode</item>
     </style>
+    <style name="AlertDialogCustomStyle" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorPrimary">@color/white</item>
+    </style>
 </resources>

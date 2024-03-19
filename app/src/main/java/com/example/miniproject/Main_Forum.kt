@@ -36,7 +36,6 @@ class Main_Forum : AppCompatActivity() {
     private lateinit var sendButton: ImageView
     private lateinit var progressBar: ProgressBar
     private lateinit var databaseReference: DatabaseReference
-    private lateinit var nameReference: DatabaseReference
     private lateinit var auth: FirebaseAuth
     var selectedItemIndex = 0
     private val arrItems = arrayOf("Student" , "Alumni")
@@ -64,24 +63,25 @@ class Main_Forum : AppCompatActivity() {
         }
 
         search.setOnClickListener {
-            MaterialAlertDialogBuilder(this)
+            MaterialAlertDialogBuilder(this, R.style.AlertDialogCustomStyle)
                 .setTitle("Select one to search for")
-                .setSingleChoiceItems(arrItems, selectedItemIndex) {dialog, which->
+                .setSingleChoiceItems(arrItems, selectedItemIndex) { dialog, which ->
                     selectedItemIndex = which
                     selectedItem = arrItems[which]
                 }
-                .setPositiveButton("OK") {dialog, which->
+                .setPositiveButton("OK") { dialog, which ->
                     val intent = when(selectedItem) {
-                        "Student" -> Intent(this, Search::class.java)
-                        "Alumni" -> Intent(this, Search::class.java)
+                        "Student", "Alumni" -> Intent(this, Search::class.java).apply {
+                            putExtra("selectedRole", selectedItem) // Put extra here
+                        }
                         else -> Intent(this, Main_Forum::class.java)
                     }
                     startActivity(intent)
                 }
-                .setNeutralButton("Cancel") {dialog, which->
-
-                }.show()
+                .setNeutralButton("Cancel") { dialog, which -> }
+                .show()
         }
+
 
         notify.setOnClickListener {
             intent = Intent(this, calendarView::class.java)

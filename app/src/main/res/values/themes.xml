@@ -62,5 +62,9 @@
         <item name="android:tint">@color/black</item>
         <item name="android:src">@drawable/dark_mode</item>
     </style>
+    <style name="AlertDialogCustomStyle" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorPrimary">@color/Royal_Blue</item>
+    </style>
+
     <style name="Theme.MiniProject" parent="Base.Theme.MiniProject" />
 </resources>
