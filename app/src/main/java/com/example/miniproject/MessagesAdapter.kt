@@ -24,7 +24,7 @@ class MessagesAdapter(private val context: Context, private val messages: List<M
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
         val message = messages[position]
-        holder.messageTextView.text = message.text
+        holder.messageTextView.text = message.messageText
     }
 
     override fun getItemCount(): Int {

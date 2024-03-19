@@ -24,14 +24,19 @@ import com.google.firebase.database.*
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-
-
+data class Message(
+    val userId: String? = null,
+    val displayName: String? = null,
+    val messageText: String? = null,
+    val timestamp: Long? = null
+)
 class Main_Forum : AppCompatActivity() {
     private lateinit var messageRecyclerView: RecyclerView
     private lateinit var messageEditText: EditText
     private lateinit var sendButton: ImageView
     private lateinit var progressBar: ProgressBar
     private lateinit var databaseReference: DatabaseReference
+    private lateinit var nameReference: DatabaseReference
     private lateinit var auth: FirebaseAuth
     var selectedItemIndex = 0
     private val arrItems = arrayOf("Student" , "Alumni")
@@ -152,31 +157,44 @@ class Main_Forum : AppCompatActivity() {
         }
 
         val userId = currentUser.uid
+        val userReference = FirebaseDatabase.getInstance("https://mini-project-62a72-default-rtdb.asia-southeast1.firebasedatabase.app")
+            .getReference("users").child(userId)
 
-        val timestamp = System.currentTimeMillis()
+        userReference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val displayName = snapshot.child("username").value as? String
 
-        val message = Message(userId, currentUser.displayName, messageText, timestamp)
-        val messageKey = databaseReference.push().key
+                val timestamp = System.currentTimeMillis()
 
-        if (messageKey != null) {
-            databaseReference.child(messageKey).setValue(message)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Log.d("SendMessage", "Message sent successfully")
-                    } else {
-                        Log.e("SendMessage", "Error sending message", task.exception)
-                    }
+                val message = Message(userId, displayName, messageText, timestamp)
+                val messageKey = databaseReference.push().key
 
-                    // Scroll to the last item in the RecyclerView (whether send is successful or not)
-                    messageRecyclerView.smoothScrollToPosition(messagesAdapter.itemCount - 1)
+                if (messageKey != null) {
+                    databaseReference.child(messageKey).setValue(message)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                Log.d("SendMessage", "Message sent successfully")
+                            } else {
+                                Log.e("SendMessage", "Error sending message", task.exception)
+                            }
+
+                            // Scroll to the last item in the RecyclerView (whether send is successful or not)
+                            messageRecyclerView.smoothScrollToPosition(messagesAdapter.itemCount - 1)
+                        }
+                } else {
+                    Log.e("SendMessage", "Message key is null")
                 }
-        } else {
-            Log.e("SendMessage", "Message key is null")
-        }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("MessagesAdapter", "Failed to fetch user name", error.toException())
+            }
+        })
 
         // Clear the message input field
         messageEditText.text.clear()
     }
+
 
 
     private fun showPopupMenu(view: View?) {
@@ -202,13 +220,6 @@ class Main_Forum : AppCompatActivity() {
     }
 }
 
-data class Message(
-    val userId: String? = null,
-    val displayName: String? = null,
-    val messageText: String? = null,
-    val timestamp: Long? = null
-)
-
 class MessagesAdapter(private val context: Context, private val messages: MutableList<Message>) :
     RecyclerView.Adapter<MessagesAdapter.MessageViewHolder>() {
 
@@ -218,7 +229,7 @@ class MessagesAdapter(private val context: Context, private val messages: Mutabl
     class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val timestamp: TextView = itemView.findViewById(R.id.textDateTime)
         val messageText: TextView = itemView.findViewById(R.id.textMessage)
-//        val userName: TextView = itemView.findViewById(R.id.Name)
+        val userName: TextView? = itemView.findViewById(R.id.Name)
     }
 
     // Update onCreateViewHolder method to inflate the correct layout based on the view type
@@ -238,9 +249,9 @@ class MessagesAdapter(private val context: Context, private val messages: Mutabl
 
         if (getItemViewType(position) == VIEW_TYPE_RECEIVED) {
             // This is a received message, set user name and message text
-//            holder.userName.text = message.displayName
             holder.messageText.text = message.messageText
             holder.timestamp.text = formatTimestamp(message.timestamp)
+            holder.userName?.text = message.displayName ?: "Username"
 
         } else {
             // This is a sent message, set only message text
@@ -253,7 +264,7 @@ class MessagesAdapter(private val context: Context, private val messages: Mutabl
         if (timestamp == null) {
             return ""
         }
-        val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        val sdf = SimpleDateFormat("EEE dd hh:mm a", Locale.getDefault())
         return sdf.format(Date(timestamp))
     }
     override fun getItemViewType(position: Int): Int {

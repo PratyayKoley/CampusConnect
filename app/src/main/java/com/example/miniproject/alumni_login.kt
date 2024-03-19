@@ -75,6 +75,8 @@ import android.widget.Toast
 import android.content.Intent
 import com.example.miniproject.databinding.ActivityAlumniLoginBinding
 import com.example.miniproject.databinding.ActivityAlumniSignupBinding
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class alumni_login : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -82,6 +84,7 @@ class alumni_login : AppCompatActivity() {
     private lateinit var editTextTextEmailAddress: EditText
     private lateinit var Alu_Pass: EditText
     private lateinit var Login: Button
+    private lateinit var databaseReference: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,15 +94,19 @@ class alumni_login : AppCompatActivity() {
         editTextTextEmailAddress = findViewById(R.id.editTextTextEmailAddress)
         Alu_Pass = findViewById(R.id.Alu_Pass)
         Login = findViewById(R.id.button4)
-
+        databaseReference = FirebaseDatabase.getInstance("https://mini-project-62a72-default-rtdb.asia-southeast1.firebasedatabase.app")
+            .getReference("users")
         Login.setOnClickListener {
             if (checking()) {
                 val email = editTextTextEmailAddress.text.toString()
                 val password = Alu_Pass.text.toString()
-
+                val role = "Alumni"
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
+                            val currentUser = auth.currentUser
+                            val userUid = currentUser?.uid.toString()
+                            databaseReference.child(userUid).child("Role").setValue(role)
                             Toast.makeText(this, "Login Successful", Toast.LENGTH_LONG).show()
                             val intent = Intent(this, Main_Forum::class.java)
                             startActivity(intent)

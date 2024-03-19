@@ -10,6 +10,8 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextUtils
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -28,6 +30,7 @@ import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Switch
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
 
@@ -106,6 +109,7 @@ class Profile : AppCompatActivity() {
             databaseReference.child(UID).get().addOnSuccessListener { dataSnapshot ->
                 val profileImageUrl = dataSnapshot.child("profileImage").getValue(String::class.java)
                 val userType = dataSnapshot.child("Role").getValue(String::class.java)
+                val name = dataSnapshot.child("username").getValue(String::class.java) // Get the username
                 Log.d(TAG, "User type fetched from database: $userType") // Log user type
 
                 // Load the image into the userDp ImageView using the URL
@@ -118,6 +122,12 @@ class Profile : AppCompatActivity() {
                 // Set the user type in the usertype TextView
                 usertype.text = userType
                 useremail.text = currentUserEmail.toString()
+                if (!TextUtils.isEmpty(name)) {
+                    username.text = Editable.Factory.getInstance().newEditable(name)
+                } else {
+                    // Handle case where username is empty or null
+                    // You can set a default value or handle it according to your application's logic
+                }
             }.addOnFailureListener { e ->
                 // Handle any errors while fetching data from the database
                 Log.e(TAG, "Error fetching profile image URL and user type: $e")
@@ -257,6 +267,36 @@ class Profile : AppCompatActivity() {
 
             // Change button icon to indicate non-editing mode
             editButton.setImageResource(R.drawable.write) // Replace with your original icon
+
+            // Get the new username
+            val newUsername = editText.text.toString().trim()
+
+            // Update the username in the database
+            if (newUsername.isNotEmpty()) {
+                updateUsernameInDatabase(newUsername)
+            } else {
+                // Display a message to the user indicating that the username cannot be empty
+                Toast.makeText(this, "Username cannot be empty", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun updateUsernameInDatabase(newUsername: String) {
+        val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
+        currentUserUid?.let { uid ->
+            val updateMap = hashMapOf<String, Any>("username" to newUsername)
+
+            databaseReference.child(uid).updateChildren(updateMap)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d(TAG, "Username updated in Realtime Database")
+                    } else {
+                        // Handle failure to update username
+                        Log.e(TAG, "Failed to update username in Realtime Database", task.exception)
+                        // Display a message to the user indicating the failure
+                        Toast.makeText(this, "Failed to update username. Please try again.", Toast.LENGTH_SHORT).show()
+                    }
+                }
         }
     }
 
