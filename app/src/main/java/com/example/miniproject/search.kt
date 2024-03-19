@@ -1,5 +1,6 @@
 package com.example.miniproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -29,6 +30,15 @@ class Search : AppCompatActivity() {
         // Initialize the ListView with an empty adapter
         val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
         listView.adapter = adapter
+
+        listView.setOnItemClickListener { _, _, position, _ ->
+            val selectedUsername = adapter.getItem(position)
+            val intent = Intent(this, ProfileView::class.java).apply {
+                putExtra("username", selectedUsername)
+            }
+            startActivity(intent)
+        }
+
 
         // Filter the ListView items based on search query
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -69,4 +79,5 @@ class Search : AppCompatActivity() {
             }
         })
     }
+
 }

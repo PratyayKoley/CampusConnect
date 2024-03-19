@@ -15,6 +15,9 @@
         android:theme="@style/Theme.MiniProject"
         tools:targetApi="31">
         <activity
+            android:name=".ProfileView"
+            android:exported="false" />
+        <activity
             android:name=".Calls"
             android:exported="false" />
         <activity

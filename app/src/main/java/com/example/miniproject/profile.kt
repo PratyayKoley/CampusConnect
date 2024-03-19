@@ -249,7 +249,7 @@ class Profile : AppCompatActivity() {
         val editText = findViewById<EditText>(R.id.Username)
         val editButton = findViewById<ImageButton>(R.id.edit_username)
 
-        // Toggle editability of EditText
+        // Toggle edit ability of EditText
         editText.isEnabled = !editText.isEnabled
 
         if (editText.isEnabled) {

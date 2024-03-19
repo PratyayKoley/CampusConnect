@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/BackgroundColor"
+    tools:context=".ProfileView">
+
+    <ImageView
+        android:id="@+id/UserDP"
+        android:layout_width="191dp"
+        android:layout_height="175dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/send_button"
+        android:backgroundTint="@color/Slate_Gray"
+        android:src="@drawable/person"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <TextView
+        android:id="@id/Username"
+        style="@style/Profile"
+        android:layout_width="368dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="72dp"
+        android:hint="Username"
+        android:paddingLeft="60dp"
+        android:paddingTop="18dp"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserDP" />
+
+    <ImageView
+        android:id="@+id/user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/person"
+        app:layout_constraintBottom_toBottomOf="@+id/Username"
+        app:layout_constraintEnd_toEndOf="@+id/Username"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="@+id/Username"
+        app:layout_constraintTop_toTopOf="@+id/Username"
+        style="@style/IconColor" />
+
+
+    <TextView
+        android:id="@+id/Useremail"
+        android:layout_width="368dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:hint="Email"
+        android:textSize="17sp"
+        android:paddingLeft="60dp"
+        android:paddingTop="18dp"
+        style="@style/Profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Username" />
+
+    <ImageView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/email"
+        style="@style/IconColor"
+        app:layout_constraintBottom_toBottomOf="@+id/Useremail"
+        app:layout_constraintEnd_toEndOf="@+id/Useremail"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="@+id/Useremail"
+        app:layout_constraintTop_toTopOf="@+id/Useremail"
+        app:layout_constraintVertical_bias="0.527" />
+
+    <TextView
+        android:id="@+id/Usertype"
+        android:layout_width="368dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:hint="Type"
+        android:textSize="17sp"
+        android:paddingLeft="60dp"
+        android:paddingTop="18dp"
+        style="@style/Profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Useremail" />
+
+    <ImageView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/type"
+        style="@style/IconColor"
+        app:layout_constraintBottom_toBottomOf="@+id/Usertype"
+        app:layout_constraintEnd_toEndOf="@+id/Usertype"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="@+id/Usertype"
+        app:layout_constraintTop_toTopOf="@+id/Usertype"
+        app:layout_constraintVertical_bias="0.527" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
