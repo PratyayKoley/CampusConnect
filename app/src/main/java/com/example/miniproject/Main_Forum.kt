@@ -234,7 +234,7 @@ class MessagesAdapter(private val context: Context, private val messages: Mutabl
     // Update the MessageViewHolder class to include the user name TextView
     class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val userinfo: RelativeLayout? = itemView.findViewById(R.id.UserInfo)
-        val userDp: ImageButton? = itemView.findViewById(R.id.UserDP)
+        val userDp: ImageView? = itemView.findViewById(R.id.UserDP)
         val timestamp: TextView = itemView.findViewById(R.id.textDateTime)
         val messageText: TextView = itemView.findViewById(R.id.textMessage)
         val userName: TextView? = itemView.findViewById(R.id.Name)

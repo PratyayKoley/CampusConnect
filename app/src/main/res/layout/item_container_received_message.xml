@@ -23,13 +23,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/UserDP"
                 android:layout_width="30dp"
-                android:layout_height="26dp"
+                android:layout_height="23dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:paddingLeft="10dp"
+                style="@style/IconColor"
                 android:src="@drawable/dp"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
