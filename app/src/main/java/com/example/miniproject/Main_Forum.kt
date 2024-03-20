@@ -15,12 +15,16 @@ import android.view.ViewGroup
 import android.content.Context
 import android.net.Uri
 import android.provider.CallLog
+import android.widget.ImageButton
 import android.widget.ProgressBar
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserInfo
 import com.google.firebase.database.*
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -229,6 +233,8 @@ class MessagesAdapter(private val context: Context, private val messages: Mutabl
     private val VIEW_TYPE_RECEIVED = 2
     // Update the MessageViewHolder class to include the user name TextView
     class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val userinfo: RelativeLayout? = itemView.findViewById(R.id.UserInfo)
+        val userDp: ImageButton? = itemView.findViewById(R.id.UserDP)
         val timestamp: TextView = itemView.findViewById(R.id.textDateTime)
         val messageText: TextView = itemView.findViewById(R.id.textMessage)
         val userName: TextView? = itemView.findViewById(R.id.Name)
@@ -260,6 +266,31 @@ class MessagesAdapter(private val context: Context, private val messages: Mutabl
             holder.messageText.text = message.messageText
             holder.timestamp.text = formatTimestamp(message.timestamp)
         }
+
+        holder.userDp?.setOnClickListener {
+            // Handle click on user DP
+            // Navigate to a different layout or activity
+            val intent = Intent(context, ProfileView::class.java).apply {
+                putExtra("username", holder.userName?.text.toString())
+            }
+            context.startActivity(intent)
+        }
+
+        holder.userName?.setOnClickListener {
+            // Handle click on username
+            // Navigate to a different layout or activity
+            val intent = Intent(context, ProfileView::class.java).apply {
+                putExtra("username", holder.userName.text.toString())
+            }
+            context.startActivity(intent)
+        }
+
+        holder.userinfo?.setOnClickListener {
+            val intent = Intent(context, ProfileView::class.java).apply {
+                putExtra("username", holder.userName?.text.toString())
+            }
+            context.startActivity(intent)
+        }
     }
 
     private fun formatTimestamp(timestamp: Long?): String {
@@ -277,7 +308,6 @@ class MessagesAdapter(private val context: Context, private val messages: Mutabl
             VIEW_TYPE_RECEIVED
         }
     }
-
 
     override fun getItemCount(): Int {
         return messages.size
