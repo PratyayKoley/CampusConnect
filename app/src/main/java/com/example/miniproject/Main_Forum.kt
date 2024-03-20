@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.content.Context
+import android.net.Uri
 import android.provider.CallLog
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -88,8 +89,9 @@ class Main_Forum : AppCompatActivity() {
             startActivity(intent)
         }
 
-        calls.setOnClickListener{
-            intent = Intent(this, Calls::class.java)
+        calls.setOnClickListener {
+            val url = "https://meet.google.com/"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         }
 

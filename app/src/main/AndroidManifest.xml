@@ -18,9 +18,6 @@
             android:name=".ProfileView"
             android:exported="false" />
         <activity
-            android:name=".Calls"
-            android:exported="false" />
-        <activity
             android:name=".Profile"
             android:exported="false" />
         <activity
