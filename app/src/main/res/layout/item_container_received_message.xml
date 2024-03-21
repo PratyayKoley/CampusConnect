@@ -23,16 +23,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/UserDP"
-                android:layout_width="30dp"
-                android:layout_height="23dp"
-                android:clickable="true"
-                android:focusable="true"
-                style="@style/IconColor"
-                android:src="@drawable/dp"
-                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
             <TextView
                 android:id="@+id/Name"
                 style="@style/TextColor"
@@ -41,7 +31,7 @@
                 android:layout_marginTop="5dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:minWidth="48dp"
+                android:layout_marginLeft="15dp"
                 android:text="Username"
                 android:textSize="10sp"
                 tools:ignore="TouchTargetSizeCheck" />
