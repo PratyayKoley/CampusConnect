@@ -22,6 +22,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -238,7 +239,7 @@ class MessagesAdapter(private val context: Context, private val messages: Mutabl
     // Update the MessageViewHolder class to include the user name TextView
     class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val userinfo: RelativeLayout? = itemView.findViewById(R.id.UserInfo)
-        val userDp: ImageView = itemView.findViewById(R.id.UserDP)
+        val userDp: ImageView? = itemView.findViewById(R.id.UserDP) // Make it nullable
         val timestamp: TextView = itemView.findViewById(R.id.textDateTime)
         val messageText: TextView = itemView.findViewById(R.id.textMessage)
         val userName: TextView? = itemView.findViewById(R.id.Name)
@@ -259,18 +260,23 @@ class MessagesAdapter(private val context: Context, private val messages: Mutabl
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
 
         val message = messages[position]
-
+        Log.d("Image URL", message.url ?: "URL is null")
         if (getItemViewType(position) == VIEW_TYPE_RECEIVED) {
             // This is a received message, set user name and message text
             holder.messageText.text = message.messageText
             holder.timestamp.text = formatTimestamp(message.timestamp)
             holder.userName?.text = message.displayName ?: "Username"
             if (!message.url.isNullOrEmpty()) {
-
-                Glide.with(context)
-                    .load(message.url) // Assuming you have a profileImageUrl property in your Message class
-                    .apply(RequestOptions.bitmapTransform(CircleCrop())) // Apply circle transformation
-                    .into(holder.userDp)
+                // Check if userDp is not null before loading the image
+                holder.userDp?.let { imageView ->
+                    Glide.with(context)
+                        .load(message.url) // Assuming you have a profileImageUrl property in your Message class
+                        .apply(RequestOptions.bitmapTransform(CircleCrop())) // Apply circle transformation
+                        .apply(RequestOptions.overrideOf(30,23))
+                        .placeholder(R.drawable.dp)
+                        .error(R.drawable.dp) // Placeholder for error case
+                        .into(imageView)
+                }
             }
         } else {
             // This is a sent message, set only message text
@@ -278,7 +284,7 @@ class MessagesAdapter(private val context: Context, private val messages: Mutabl
             holder.timestamp.text = formatTimestamp(message.timestamp)
         }
 
-        holder.userDp.setOnClickListener {
+        holder.userDp?.setOnClickListener {
             // Handle click on user DP
             // Navigate to a different layout or activity
             val intent = Intent(context, ProfileView::class.java).apply {
