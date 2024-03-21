@@ -43,11 +43,12 @@ class student_login : AppCompatActivity() {
                     .addOnCompleteListener(this@student_login) { task ->
                         if (task.isSuccessful) {
                             val currentUser = auth.currentUser
-
+                            val currentemail  = currentUser?.email.toString()
                             val userUid = currentUser?.uid.toString()
 
                             // Push the role information to the Realtime Database
                             databaseReference.child(userUid).child("Role").setValue(role)
+                            databaseReference.child(userUid).child("email").setValue(currentemail)
                             Toast.makeText(this@student_login, "Login Successful", Toast.LENGTH_LONG).show()
                             intent = Intent(this,Main_Forum::class.java)
                             startActivity(intent)

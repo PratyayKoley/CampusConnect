@@ -2,7 +2,12 @@ package com.example.miniproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DecodeFormat
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -13,6 +18,7 @@ class ProfileView : AppCompatActivity() {
         private lateinit var usernameTextView: TextView
         private lateinit var emailTextView: TextView
         private lateinit var typeTextView: TextView
+        private lateinit var userdp: ImageView
         private lateinit var databaseReference: DatabaseReference
 
         override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +26,7 @@ class ProfileView : AppCompatActivity() {
             setContentView(R.layout.activity_profile_view)
 
             // Initialize views
+            userdp = findViewById(R.id.UserDP)
             usernameTextView = findViewById(R.id.Username)
             emailTextView = findViewById(R.id.Useremail)
             typeTextView = findViewById(R.id.Usertype)
@@ -43,8 +50,16 @@ class ProfileView : AppCompatActivity() {
                             for (snapshot in dataSnapshot.children) {
                                 val email = snapshot.child("email").getValue(String::class.java)
                                 val userType = snapshot.child("Role").getValue(String::class.java)
-
+                                val UserDp = snapshot.child("profileImage").getValue(String::class.java)
                                 // Set username, email, and user type in TextViews
+                                if (!UserDp.isNullOrEmpty()) {
+                                    Glide.with(this@ProfileView /* context */)
+                                        .load(UserDp)
+                                        .apply(RequestOptions.bitmapTransform(CircleCrop()))
+                                        .apply(RequestOptions.overrideOf(300,300))
+                                        .apply(RequestOptions.formatOf(DecodeFormat.PREFER_ARGB_8888))
+                                        .into(userdp)
+                                }
                                 usernameTextView.text = clickedUsername
                                 emailTextView.text = email
                                 typeTextView.text = userType

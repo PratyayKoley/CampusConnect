@@ -2,6 +2,7 @@ package com.example.miniproject
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.VoiceInteractor.Request
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
@@ -33,6 +34,9 @@ import android.widget.Switch
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
+import com.bumptech.glide.load.DecodeFormat
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.request.RequestOptions
 
 private const val TAG = "ProfileActivity"
 class Profile : AppCompatActivity() {
@@ -116,6 +120,9 @@ class Profile : AppCompatActivity() {
                 if (!profileImageUrl.isNullOrEmpty()) {
                     Glide.with(this /* context */)
                         .load(profileImageUrl)
+                        .apply(RequestOptions.bitmapTransform(CircleCrop()))
+                        .apply(RequestOptions.overrideOf(300,300))
+                        .apply(RequestOptions.formatOf(DecodeFormat.PREFER_ARGB_8888))
                         .into(userDp)
                 }
 
@@ -182,7 +189,7 @@ class Profile : AppCompatActivity() {
             val storageReference: StorageReference =
                 storage.reference.child("profileImages")
                     .child(auth.currentUser?.uid ?: "")
-                    .child("image.jpg")
+                    .child("image.png")
 
             val inputStream = contentResolver.openInputStream(imageUri)
             val selectedBitmap = BitmapFactory.decodeStream(inputStream)
@@ -273,7 +280,7 @@ class Profile : AppCompatActivity() {
 
             // Update the username in the database
             if (newUsername.isNotEmpty()) {
-                updateUsernameInDatabase(newUsername)
+                updateUsernameAndEmailInDatabase(newUsername)
             } else {
                 // Display a message to the user indicating that the username cannot be empty
                 Toast.makeText(this, "Username cannot be empty", Toast.LENGTH_SHORT).show()
@@ -281,24 +288,31 @@ class Profile : AppCompatActivity() {
         }
     }
 
-    private fun updateUsernameInDatabase(newUsername: String) {
-        val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
+    private fun updateUsernameAndEmailInDatabase(newUsername: String) {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val currentUserUid = currentUser?.uid
+        val currentUserEmail = currentUser?.email
+
         currentUserUid?.let { uid ->
-            val updateMap = hashMapOf<String, Any>("username" to newUsername)
+            val updateMap = hashMapOf<String, Any>(
+                "username" to newUsername,
+                "email" to currentUserEmail.orEmpty() // Ensure email is not null
+            )
 
             databaseReference.child(uid).updateChildren(updateMap)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Log.d(TAG, "Username updated in Realtime Database")
+                        Log.d(TAG, "Username and Email updated in Realtime Database")
                     } else {
-                        // Handle failure to update username
-                        Log.e(TAG, "Failed to update username in Realtime Database", task.exception)
+                        // Handle failure to update username and email
+                        Log.e(TAG, "Failed to update username and email in Realtime Database", task.exception)
                         // Display a message to the user indicating the failure
-                        Toast.makeText(this, "Failed to update username. Please try again.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Failed to update username and email. Please try again.", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
     }
+
 
 
     private fun bitmapToByteArray(bitmap: Bitmap): ByteArray {

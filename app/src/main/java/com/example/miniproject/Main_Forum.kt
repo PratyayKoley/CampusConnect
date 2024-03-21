@@ -21,6 +21,9 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -33,7 +36,8 @@ data class Message(
     val userId: String? = null,
     val displayName: String? = null,
     val messageText: String? = null,
-    val timestamp: Long? = null
+    val timestamp: Long? = null,
+    val url: String? = null
 )
 class Main_Forum : AppCompatActivity() {
     private lateinit var messageRecyclerView: RecyclerView
@@ -169,10 +173,10 @@ class Main_Forum : AppCompatActivity() {
         userReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val displayName = snapshot.child("username").value as? String
-
+                val userUrl = snapshot.child("profileImage").value as? String
                 val timestamp = System.currentTimeMillis()
 
-                val message = Message(userId, displayName, messageText, timestamp)
+                val message = Message(userId, displayName, messageText, timestamp, userUrl)
                 val messageKey = databaseReference.push().key
 
                 if (messageKey != null) {
@@ -234,7 +238,7 @@ class MessagesAdapter(private val context: Context, private val messages: Mutabl
     // Update the MessageViewHolder class to include the user name TextView
     class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val userinfo: RelativeLayout? = itemView.findViewById(R.id.UserInfo)
-        val userDp: ImageView? = itemView.findViewById(R.id.UserDP)
+        val userDp: ImageView = itemView.findViewById(R.id.UserDP)
         val timestamp: TextView = itemView.findViewById(R.id.textDateTime)
         val messageText: TextView = itemView.findViewById(R.id.textMessage)
         val userName: TextView? = itemView.findViewById(R.id.Name)
@@ -253,6 +257,7 @@ class MessagesAdapter(private val context: Context, private val messages: Mutabl
 
     // Update onBindViewHolder method to set data based on the view type
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
+
         val message = messages[position]
 
         if (getItemViewType(position) == VIEW_TYPE_RECEIVED) {
@@ -260,14 +265,20 @@ class MessagesAdapter(private val context: Context, private val messages: Mutabl
             holder.messageText.text = message.messageText
             holder.timestamp.text = formatTimestamp(message.timestamp)
             holder.userName?.text = message.displayName ?: "Username"
+            if (!message.url.isNullOrEmpty()) {
 
+                Glide.with(context)
+                    .load(message.url) // Assuming you have a profileImageUrl property in your Message class
+                    .apply(RequestOptions.bitmapTransform(CircleCrop())) // Apply circle transformation
+                    .into(holder.userDp)
+            }
         } else {
             // This is a sent message, set only message text
             holder.messageText.text = message.messageText
             holder.timestamp.text = formatTimestamp(message.timestamp)
         }
 
-        holder.userDp?.setOnClickListener {
+        holder.userDp.setOnClickListener {
             // Handle click on user DP
             // Navigate to a different layout or activity
             val intent = Intent(context, ProfileView::class.java).apply {
