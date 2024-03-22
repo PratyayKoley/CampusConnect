@@ -106,7 +106,10 @@ class alumni_login : AppCompatActivity() {
                         if (task.isSuccessful) {
                             val currentUser = auth.currentUser
                             val userUid = currentUser?.uid.toString()
+                            val currentemail  = currentUser?.email.toString()
+
                             databaseReference.child(userUid).child("Role").setValue(role)
+                            databaseReference.child(userUid).child("email").setValue(currentemail)
                             Toast.makeText(this, "Login Successful", Toast.LENGTH_LONG).show()
                             val intent = Intent(this, Main_Forum::class.java)
                             startActivity(intent)
