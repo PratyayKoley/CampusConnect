@@ -281,6 +281,10 @@ class Profile : AppCompatActivity() {
             // Update the username in the database
             if (newUsername.isNotEmpty()) {
                 updateUsernameAndEmailInDatabase(newUsername)
+
+                //Added intent after click
+                val intent = Intent(this, Main_Forum::class.java)
+                startActivity(intent)
             } else {
                 // Display a message to the user indicating that the username cannot be empty
                 Toast.makeText(this, "Username cannot be empty", Toast.LENGTH_SHORT).show()

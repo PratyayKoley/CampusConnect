@@ -44,7 +44,7 @@
         </activity>
         <activity
             android:name=".alumni_login"
-            android:parentActivityName=".AlumniSignup" />
+            android:parentActivityName=".alumni_signup" />
         <activity
             android:name=".alumni_signup"
             android:parentActivityName=".MainActivity" />

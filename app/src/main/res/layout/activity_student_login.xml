@@ -9,7 +9,7 @@
     android:paddingEnd="20dp"
     android:paddingBottom="20dp"
     style="@style/BackgroundColor"
-    tools:context=".StudentLogin">
+    tools:context=".student_login">
 
     <TextView
         android:id="@+id/textView9"
