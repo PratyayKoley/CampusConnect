@@ -102,31 +102,20 @@
         app:layout_constraintVertical_bias="0.527" />
 
     <TextView
-        android:id="@+id/appname"
+        android:id="@+id/link_to_forum"
         style="@style/TextColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
-        android:text="CampusConnect"
+        android:layout_marginTop="140dp"
+        android:text="Proceed to the forum page"
         android:textSize="17sp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Usertype" />
 
-    <TextView
-        android:id="@+id/apkversion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="v 1.0.0"
-        android:textSize="17sp"
-        style="@style/TextColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appname"
-        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/Usertype"
