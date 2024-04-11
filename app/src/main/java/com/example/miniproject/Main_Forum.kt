@@ -54,20 +54,10 @@ class Main_Forum : AppCompatActivity() {
     private lateinit var messagesAdapter: MessagesAdapter
     private val userOnlineTracker = UserOnlineTracker()
 
-//    override fun onResume() {
-//        super.onResume()
-//        userOnlineTracker.updateUserStatus(true)
-//    }
-//
-//    override fun onPause() {
-//        super.onPause()
-//        userOnlineTracker.updateUserStatus(false)
-//    }
     override fun onStart() {
-    super.onStart()
-    userOnlineTracker.updateUserStatus(true)
-    userOnlineTracker.calculateWeeklyOnlineTime()
-}
+        super.onStart()
+        userOnlineTracker.updateUserStatus(true)
+    }
 
     override fun onStop() {
         super.onStop()
