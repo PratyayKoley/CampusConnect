@@ -33,6 +33,8 @@ import com.google.firebase.database.*
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import com.example.miniproject.UserOnlineTracker
+
 data class Message(
     val userId: String? = null,
     val displayName: String? = null,
@@ -50,7 +52,27 @@ class Main_Forum : AppCompatActivity() {
     private val arrItems = arrayOf("Student" , "Alumni")
     var selectedItem = arrItems[selectedItemIndex]
     private lateinit var messagesAdapter: MessagesAdapter
+    private val userOnlineTracker = UserOnlineTracker()
 
+//    override fun onResume() {
+//        super.onResume()
+//        userOnlineTracker.updateUserStatus(true)
+//    }
+//
+//    override fun onPause() {
+//        super.onPause()
+//        userOnlineTracker.updateUserStatus(false)
+//    }
+    override fun onStart() {
+    super.onStart()
+    userOnlineTracker.updateUserStatus(true)
+    userOnlineTracker.calculateWeeklyOnlineTime()
+}
+
+    override fun onStop() {
+        super.onStop()
+        userOnlineTracker.updateUserStatus(false)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_forum)
