@@ -47,6 +47,7 @@ class Profile : AppCompatActivity() {
     private lateinit var usertype: TextView
     private lateinit var userDp: ImageView
     private lateinit var user_mode: TextView
+    private lateinit var link: TextView
     private lateinit var changeDpButton: ImageButton
     private lateinit var databaseReference: DatabaseReference
     private lateinit var auth: FirebaseAuth
@@ -79,6 +80,7 @@ class Profile : AppCompatActivity() {
         usertype = findViewById(R.id.Usertype)
         userDp = findViewById(R.id.UserDP)
         changeDpButton = findViewById(R.id.changedp)
+        link = findViewById(R.id.link_to_forum)
 
         loadProfileImageAndType()
         changeDpButton.setOnClickListener {
@@ -87,6 +89,20 @@ class Profile : AppCompatActivity() {
         user_mode.setOnClickListener {
             // Call a method to change the theme
             changeTheme()
+        }
+
+        link.setOnClickListener {
+            changeView()
+        }
+    }
+
+    private fun changeView() {
+        val enteredUsername = username.text.toString().trim()
+        if (enteredUsername.isEmpty()) {
+            Toast.makeText(this, "Username cannot be empty", Toast.LENGTH_SHORT).show()
+        } else {
+            val intent = Intent(this, Main_Forum::class.java)
+            startActivity(intent)
         }
     }
 
