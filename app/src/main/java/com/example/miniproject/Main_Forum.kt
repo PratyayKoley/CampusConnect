@@ -54,13 +54,13 @@ class Main_Forum : AppCompatActivity() {
     private lateinit var messagesAdapter: MessagesAdapter
     private val userOnlineTracker = UserOnlineTracker()
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         userOnlineTracker.updateUserStatus(true)
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onPause() {
+        super.onPause()
         userOnlineTracker.updateUserStatus(false)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -228,6 +228,7 @@ class Main_Forum : AppCompatActivity() {
             when (item.itemId) {
                 R.id.menu_item -> {
                     if (auth.currentUser != null) {
+                        userOnlineTracker.updateUserStatus(false)
                         auth.signOut()
                         val out = Intent(this, MainActivity::class.java)
                         startActivity(out)
