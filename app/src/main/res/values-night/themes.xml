@@ -14,6 +14,8 @@
     <style name="IconColor"><item name="android:tint">@color/white</item></style>
     <style name="MessageInputBackground"><item name="android:background">@drawable/msg_input_night</item>
         <item name="android:src">@drawable/send_night</item></style>
+    <style name="search_msg"><item name="android:background">@drawable/msg_input_night</item>
+        <item name="android:tint">@color/white</item></style>
     <style name="Profile">
         <item name="android:background">@drawable/username_bg_night</item>
         <item name="android:textColor">@color/white</item>

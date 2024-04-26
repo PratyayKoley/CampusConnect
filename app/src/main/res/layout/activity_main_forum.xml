@@ -59,7 +59,7 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="68dp"
+        android:layout_height="58dp"
         android:gravity="center_vertical"
         android:layout_marginBottom="20dp"
         android:orientation="horizontal"
@@ -85,16 +85,26 @@
             android:hint="@string/Msg_Hint"
             android:textColorHint="@color/Grey"
             android:inputType="textMultiLine"
-            android:padding="20dp"
+            android:padding="18dp"
             android:textSize="17sp" />
 
         <ImageView
             android:id="@+id/send_button"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="8sp"
-            android:layout_marginBottom="6sp"
             style="@style/MessageInputBackground"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:clickable="true"
+            android:contentDescription="Send Button"
+            android:focusable="true"
+            android:padding="13dp" />
+
+        <ImageButton
+            android:id="@+id/search_message"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/search"
+            style="@style/search_msg"
+            android:layout_marginLeft="8sp"
             android:clickable="true"
             android:contentDescription="Send Button"
             android:focusable="true"
@@ -125,7 +135,7 @@
         app:justifyContent="space_around">
 
         <ImageView
-            android:id="@+id/imageButton"
+            android:id="@+id/home_button"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginTop="5sp"

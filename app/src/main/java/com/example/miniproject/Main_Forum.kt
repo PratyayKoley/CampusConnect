@@ -1,5 +1,6 @@
 package com.example.miniproject
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -73,6 +74,8 @@ class Main_Forum : AppCompatActivity() {
         val book: ImageView = findViewById(R.id.books)
         val profile: ImageView = findViewById(R.id.profile)
         val calls: ImageView = findViewById(R.id.calls)
+        val search_msg: ImageButton = findViewById(R.id.search_message)
+        val home_button: ImageView = findViewById(R.id.home_button)
 
         profile.setOnClickListener{
             intent = Intent(this,Profile::class.java)
@@ -81,6 +84,11 @@ class Main_Forum : AppCompatActivity() {
 
         moreImageView.setOnClickListener { view ->
             showPopupMenu(view)
+        }
+
+        home_button.setOnClickListener{
+            intent = Intent(this,Main_Forum::class.java)
+            startActivity(intent)
         }
 
         search.setOnClickListener {
@@ -103,6 +111,10 @@ class Main_Forum : AppCompatActivity() {
                 .show()
         }
 
+        search_msg.setOnClickListener {
+            // Show a dialog or search bar to input search query
+            showSearchDialog()
+        }
 
         notify.setOnClickListener {
             intent = Intent(this, calendarView::class.java)
@@ -158,6 +170,36 @@ class Main_Forum : AppCompatActivity() {
                 }
             })
         }
+
+    private fun showSearchDialog() {
+        val searchEditText = EditText(this)
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setTitle("Search Messages")
+            .setView(searchEditText)
+            .setPositiveButton("Search") { _, _ ->
+                val searchText = searchEditText.text.toString().trim()
+                searchMessages(searchText)
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+
+        dialog.show()
+    }
+
+    private fun searchMessages(query: String) {
+        val filteredMessages = mutableListOf<Message>()
+
+        for (message in messagesAdapter.messages) {
+            if (message.messageText?.contains(query, ignoreCase = true) == true) {
+                filteredMessages.add(message)
+            }
+        }
+
+        // Update the adapter with filtered messages
+        messagesAdapter.updateMessages(filteredMessages)
+    }
 
     private fun showProgressBar() {
         progressBar.visibility = ProgressBar.VISIBLE
@@ -242,7 +284,7 @@ class Main_Forum : AppCompatActivity() {
     }
 }
 
-class MessagesAdapter(private val context: Context, private val messages: MutableList<Message>) :
+class MessagesAdapter(private val context: Context, val messages: MutableList<Message>) :
     RecyclerView.Adapter<MessagesAdapter.MessageViewHolder>() {
 
     private val VIEW_TYPE_SENT = 1
@@ -324,4 +366,11 @@ class MessagesAdapter(private val context: Context, private val messages: Mutabl
             notifyDataSetChanged()
         }
     }
+
+    fun updateMessages(newMessages: List<Message>) {
+        messages.clear()
+        messages.addAll(newMessages)
+        notifyDataSetChanged()
+    }
+
 }
